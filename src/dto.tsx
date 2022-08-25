@@ -16,8 +16,14 @@ export interface IMovieItem {
 }
 export interface IItem{
   item: IMovieItem
+  onSelect: () => void;
 }
 
 export interface IMovieList{
   movieList: Array<IMovieItem>
+  onSelect: (id: number) => void;
 }
+export interface IAboutItem{
+  item: IMovieItem
+}
+

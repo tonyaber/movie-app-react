@@ -13,10 +13,11 @@ export default class MovieService {
     }
 
     getPopularMovie = () => {
-        return this.getResource(`${this._apiBase}3/movie/popular?${this._apiKey}&language=$en&page=1`).then(data => data.results);
+        return this.getResource(`${this._apiBase}3/movie/popular?${this._apiKey}&language=$en-US&page=1`).then(data => data.results);
     }
 
-    getCharacter = (id: string) => {
-        return this.getResource(`${this._apiBase}characters/${id}?${this._apiKey}`);
+    getMovie = (id: number) => {
+        return this.getResource(`${this._apiBase}3/movie/${id}?${this._apiKey}&language=en-US`);
     }
+
 }

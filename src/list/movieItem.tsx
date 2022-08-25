@@ -8,9 +8,9 @@ const Image = styled.img`
   height: auto;
 `;
 
-export default function MovieItem({ item}:IItem) {
+export default function MovieItem({ item, onSelect}:IItem) {
   return (
-    <Link to="/movie" >
+    <Link to="/movie" onClick={()=>onSelect()} >
       <p>{item.title}</p>
       <Image src = {'https://image.tmdb.org/t/p/w500/' + item.poster_path}/>
       

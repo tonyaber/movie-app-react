@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import Header from '../header/header';
 import Preview from '../preview/preview';
 import List from '../list/list';
+import AboutMovie from '../list/aboutMovie';
 import { IMovieItem } from "../dto";
 import MovieService from '../service/movieService';
 import {
@@ -16,12 +17,20 @@ import {
 
 export default function Application() {
   const [movieList, setMovieList] = useState<Array<IMovieItem>>([]);
+  const [selectMovieId, setSelectMovieId] = useState<number>(null);
+   const [selectMovie, setSelectMovie] = useState<IMovieItem>(null);
   const movieService = new MovieService();
-   useEffect(()=>{
-     movieService.getPopularMovie()
-       .then(data => setMovieList(data));
-    }, [])
+  useEffect(() => {
+    if (selectMovieId) {
+      movieService.getMovie(selectMovieId).then((data) => setSelectMovie(data))
+    }
+  }, [selectMovieId]);
   
+  useEffect(() => {
+    movieService.getPopularMovie()
+      .then(data => setMovieList(data));
+  }, []);
+ 
     return (
       <>
         <BrowserRouter>
@@ -29,10 +38,10 @@ export default function Application() {
           <Switch>
             <Route exact path='/'>
               <Preview/>
-              <List movieList={movieList} />
+              <List movieList={movieList} onSelect={(id)=>setSelectMovieId(id)} />
             </Route>
-            <Route path='/movie'>
-              <h1>About Movie</h1>
+            <Route exact path='/movie'>
+              {selectMovie?<AboutMovie item={selectMovie} />:null}     
             </Route>
           </Switch>       
         </BrowserRouter>
