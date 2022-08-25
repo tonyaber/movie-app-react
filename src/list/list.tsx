@@ -1,10 +1,6 @@
 import React from "react";
-import { IMovieItem } from '../dto';
+import { IMovieList } from '../dto';
 import MovieItem from './movieItem';
-
-interface IMovieList{
-  movieList: Array<IMovieItem>
-}
 
 
 export default function List({ movieList}:IMovieList) {

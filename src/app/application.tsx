@@ -4,6 +4,11 @@ import Preview from '../preview/preview';
 import List from '../list/list';
 import { IMovieItem } from "../dto";
 import MovieService from '../service/movieService';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 ///const key = 'cbf6d6f193d7d4a9b8ee613671126788';
 //const dataUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=$en&page=1`;
@@ -13,17 +18,24 @@ export default function Application() {
   const [movieList, setMovieList] = useState<Array<IMovieItem>>([]);
   const movieService = new MovieService();
    useEffect(()=>{
-     movieService.getPopularMovie().then(data => {
-
-          setMovieList(data);
-        })
+     movieService.getPopularMovie()
+       .then(data => setMovieList(data));
     }, [])
   
     return (
       <>
-        <Header />
-        <Preview/>
-        <List movieList={movieList} />
-      </>
+        <BrowserRouter>
+          <Header />        
+          <Switch>
+            <Route exact path='/'>
+              <Preview/>
+              <List movieList={movieList} />
+            </Route>
+            <Route path='/movie'>
+              <h1>About Movie</h1>
+            </Route>
+          </Switch>       
+        </BrowserRouter>
+      </>      
     )
 } 

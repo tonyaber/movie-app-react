@@ -14,3 +14,10 @@ export interface IMovieItem {
   vote_average: number;
   vote_count: number;
 }
+export interface IItem{
+  item: IMovieItem
+}
+
+export interface IMovieList{
+  movieList: Array<IMovieItem>
+}
