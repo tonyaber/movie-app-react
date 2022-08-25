@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import Header from '../header/header';
+import Preview from '../preview/preview';
+import List from '../list/list';
 
-export default function Application(){
+
+
+export default function Application() {
+ 
     return (
-        <div>Hello World</div>
+      <>
+        <Header />
+        <Preview/>
+        <List/>
+      </>
     )
 } 
