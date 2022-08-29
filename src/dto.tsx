@@ -30,3 +30,7 @@ export interface IAboutItem{
 export interface IRandom {
     onRandom: (id: number)=>void
 }
+
+export interface ISearchPanel{
+  onSearchPanel: (text: string) => void;
+}

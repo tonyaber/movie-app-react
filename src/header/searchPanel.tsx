@@ -1,9 +1,10 @@
 import React from "react";
+import { ISearchPanel } from "../dto";
 
-export default function SearchPanel(){
+export default function SearchPanel({onSearchPanel}:ISearchPanel){
     return (
       <>
-        <input type="text"/>
+        <input onChange= {(e)=>onSearchPanel(e.target.value)} type="text"/>
       </>
     )
 } 

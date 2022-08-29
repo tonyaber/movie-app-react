@@ -20,4 +20,8 @@ export default class MovieService {
         return this.getResource(`${this._apiBase}3/movie/${id}?${this._apiKey}&language=en-US`);
     }
 
+    getMovieSearch = (text: string) => {
+        return this.getResource(`${this._apiBase}3/search/multi?${this._apiKey}&query=${text}&page=1&include_adult=false`).then(data => data.results);
+    }
+
 }

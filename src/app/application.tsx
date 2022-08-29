@@ -11,10 +11,6 @@ import {
   Route,
 } from "react-router-dom";
 
-///const key = 'cbf6d6f193d7d4a9b8ee613671126788';
-//const dataUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=$en&page=1`;
-//fetch(dataUrl).then(res=>res.json()).then(res=> console.log(res))
-
 export default function Application() {
   const [movieList, setMovieList] = useState<Array<IMovieItem>>([]);
   const [movieId, setMovieId] = useState<number>(0)
@@ -23,7 +19,7 @@ export default function Application() {
   const [error, setError] = useState<Boolean>(false);
   const movieService = new MovieService();
 
-  const getMovie = (id:number) => {
+  const setMovie = (id:number) => {
     setLoading(true);    
     setMovieId(id);
     movieService.getMovie(id).then((data) => {
@@ -35,19 +31,34 @@ export default function Application() {
     })
   };
   
+  const setMovieSearch = (text:string) => {
+    movieService.getMovieSearch(text).then((data) => {
+      setLoading(false);
+      setMovieList(data);
+     })
+  }
   useEffect(() => {
     movieService.getPopularMovie()
-      .then(data => setMovieList(data));
+      .then(data => {
+        setLoading(false);
+        setMovieList(data);
+      });
   }, []);
  
     return (
       <>
         <BrowserRouter>
-          <Header onRandom={ (randomId)=>getMovie(randomId)} />        
+          <Header onRandom={ (randomId)=>setMovie(randomId)} onSearchPanel = {(text)=>setMovieSearch(text)} />        
           <Switch>
             <Route exact path='/'>
-              <Preview/>
-              <List movieList={movieList} onSelect={(id)=>getMovie(id)} />
+              {loading ? <p>Spiner</p> :  <Preview />}
+              {!movieList.length&&!loading?
+                <p>Nothing</p> :
+                <>                 
+                  <List movieList={movieList} onSelect={(id)=>setMovie(id)} />
+                </>
+              }
+              
             </Route>
             <Route exact path={'/movie' + movieId}>
               {error?<p>error</p>:null}
