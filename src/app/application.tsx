@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect, useMemo } from "react";
 import Header from '../header/header';
 import Preview from '../preview/preview';
 import List from '../list/list';
@@ -17,14 +17,23 @@ import {
 
 export default function Application() {
   const [movieList, setMovieList] = useState<Array<IMovieItem>>([]);
-  const [selectMovieId, setSelectMovieId] = useState<number>(null);
-   const [selectMovie, setSelectMovie] = useState<IMovieItem>(null);
+  const [movieId, setMovieId] = useState<number>(0)
+  const [selectMovie, setSelectMovie] = useState<IMovieItem>();
+  const [loading, setLoading] = useState<Boolean>(true);
+  const [error, setError] = useState<Boolean>(false);
   const movieService = new MovieService();
-  useEffect(() => {
-    if (selectMovieId) {
-      movieService.getMovie(selectMovieId).then((data) => setSelectMovie(data))
-    }
-  }, [selectMovieId]);
+
+  const getMovie = (id:number) => {
+    setLoading(true);    
+    setMovieId(id);
+    movieService.getMovie(id).then((data) => {
+      setSelectMovie(data);
+      setError(false);
+      setLoading(false);      
+    }).catch(() => {
+      setError(true);
+    })
+  };
   
   useEffect(() => {
     movieService.getPopularMovie()
@@ -34,14 +43,15 @@ export default function Application() {
     return (
       <>
         <BrowserRouter>
-          <Header />        
+          <Header onRandom={ (randomId)=>getMovie(randomId)} />        
           <Switch>
             <Route exact path='/'>
               <Preview/>
-              <List movieList={movieList} onSelect={(id)=>setSelectMovieId(id)} />
+              <List movieList={movieList} onSelect={(id)=>getMovie(id)} />
             </Route>
-            <Route exact path='/movie'>
-              {selectMovie?<AboutMovie item={selectMovie} />:null}     
+            <Route exact path={'/movie' + movieId}>
+              {error?<p>error</p>:null}
+              {loading?<p>Spiner</p>:<AboutMovie item={selectMovie} />}     
             </Route>
           </Switch>       
         </BrowserRouter>

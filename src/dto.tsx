@@ -27,3 +27,6 @@ export interface IAboutItem{
   item: IMovieItem
 }
 
+export interface IRandom {
+    onRandom: (id: number)=>void
+}

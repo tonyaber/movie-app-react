@@ -12,7 +12,7 @@ export default class MovieService {
         return await res.json();
     }
 
-    getPopularMovie = () => {
+    getPopularMovie = () => { console.log(1)
         return this.getResource(`${this._apiBase}3/movie/popular?${this._apiKey}&language=$en-US&page=1`).then(data => data.results);
     }
 
