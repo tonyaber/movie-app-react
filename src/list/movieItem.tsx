@@ -8,11 +8,17 @@ const Image = styled.img`
   height: auto;
 `;
 
+const Container = styled.div`
+  width: calc((100% - 80px) / 5);
+`
+
 export default function MovieItem({ item, onSelect }: IItem) {
   return (
-    <Link to={"/movie" + item.id} onClick={() => onSelect()} >   
+    <Container>
+      <Link to={"/movie" + item.id} onClick={() => onSelect()} > 
         <p>{item.title}</p>
-        <Image src = {'https://image.tmdb.org/t/p/w500/' + item.poster_path}/>           
-    </Link>
+        <Image src = {'https://image.tmdb.org/t/p/w500/' + item.poster_path}/>      
+      </Link>
+    </Container> 
     )
 } 

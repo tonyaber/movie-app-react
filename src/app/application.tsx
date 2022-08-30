@@ -109,7 +109,7 @@ export default function Application() {
               }              
             </Route>
             <Route exact path={'/movie' + movieId}>
-              {error?<p>error</p>:null}
+              {/* {error?<p>error</p>:null} */}
               {loading ? <p>Spinner</p> : <AboutMovie item={selectMovie}  onAddToFavorite={(id)=>addToFavorite(id) }  />}     
             </Route>
           </Switch>       
