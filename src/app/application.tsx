@@ -12,6 +12,12 @@ import {
 } from "react-router-dom";
 import FavoriteButton from "../header/favoriteButton";
 import SearchPanel from "../header/searchPanel";
+import styled from "styled-components";
+
+const Container = styled.div`
+  width:80%;
+  margin: 0 auto;
+`
 
 export default function Application() {
   const [movieList, setMovieList] = useState<Array<IMovieItem>>([]);
@@ -26,21 +32,11 @@ export default function Application() {
   const setMovie = (id: number) => {
     setLoading(true);    
     setMovieId(id);
-    const favorite = isFavorite(id);
-    const movie = movieList.find(item => item.id === id);
-    if (movie) {
-      setSelectMovie({...movie, favorite});
-      //setError(false);
+    const favorite = isFavorite(id);    
+    movieService.getMovie(id).then((data) => {
+      setSelectMovie({ ...data, favorite });
       setLoading(false);
-    // } else {
-    //    movieService.getMovie(id).then((data) => {
-    //     setSelectMovie({...data, favorite});
-    //     setError(false);
-    //     setLoading(false);      
-    //   }).catch(() => {
-    //     setError(true);
-    //   })
-    }
+    });    
   };
   
   const setMovieSearch = (text: string) => {
@@ -61,8 +57,7 @@ export default function Application() {
     if (index === -1) {
       movieService.getMovie(id).then((data) => {
         setSelectMovie({ ...selectMovie, 'favorite': true});
-        setFavoriteMovies((favoriteMovies)=>[...favoriteMovies, data]);
-        
+        setFavoriteMovies((favoriteMovies)=>[...favoriteMovies, data]);        
       })
     } else {
       setFavoriteMovies((favoriteMovies) => {
@@ -82,7 +77,6 @@ export default function Application() {
   }
 
   useEffect(() => {
-    setLoading(true);
     movieService.getPopularMovie()
       .then(data => {
         setLoading(false);
@@ -92,28 +86,40 @@ export default function Application() {
   }, []);
   
     return (
-      <>
+      <Container>
         <BrowserRouter>
-          <Header onPopularMovie={()=>setMovieList(popularMovie) }  onSearchPanel = {(text)=>setMovieSearch(text)} />        
+          <Header onFavoriteClick={() => setFavoriteList()} onPopularMovie={()=>setMovieList(popularMovie) } />        
           <Switch>
             <Route exact path='/'>
               <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} /> 
-              <FavoriteButton onFavoriteClick={()=>setFavoriteList()}/>
               <br/>
-              {loading ? <p>Spinner</p> :  <Preview />}
+
+              <br/>
               {!movieList.length&&!loading?
-                <p>Nothing</p> :
+                <p style={{color: "white"}}>Nothing</p> :
                 <>    
-                {loading?<p>Spinner</p>: <List movieList={movieList} onSelect={(id)=>setMovie(id)} />}  
+                  {loading ? <p style={{color: "white"}}>Spinner</p> :
+                    <>
+                      <Preview />
+                      <List movieList={movieList} onSelect={(id) => setMovie(id)} />
+                    </>}  
                 </>
               }              
             </Route>
             <Route exact path={'/movie' + movieId}>
               {/* {error?<p>error</p>:null} */}
-              {loading ? <p>Spinner</p> : <AboutMovie item={selectMovie}  onAddToFavorite={(id)=>addToFavorite(id) }  />}     
+              {loading ? <p style={{color: "white"}}>Spinner</p> : <AboutMovie item={selectMovie}  onAddToFavorite={(id)=>addToFavorite(id) }  />}     
+            </Route>
+            <Route exact path='/favorite'>
+              {!movieList.length && !loading ?
+                <p style={{color: "white"}}>Nothing</p> :
+                <>
+                  {loading ? <p>Spinner</p> : <List movieList={movieList} onSelect={(id) => setMovie(id)} />}
+                </>}
+
             </Route>
           </Switch>       
         </BrowserRouter>
-      </>      
+      </Container>      
     )
 } 

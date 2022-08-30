@@ -6,14 +6,27 @@ import { IPopularMovie } from "../dto";
 
 const Image = styled.img`
   width: 20px;
-  heigth: auto;
+  height: auto;
+  filter: invert(1);
 `;
+
+const Title = styled.h1`
+`
+
+const LinkComponent = styled(Link)`
+  color: white;
+  text-decoration: none;
+  &:hover, &:focus, &:active{
+    color: white;
+    text-decoration: none;
+  }
+`
 
 export default function Logo({onPopularMovie}:IPopularMovie) {
   return (
-    <Link to={"/"} onClick={()=>onPopularMovie()}>
+    <LinkComponent to={"/"} onClick={()=>onPopularMovie()}>
         <Image src={img} />
-        <h1>MovieApp</h1>
-      </Link>
+        <Title>MovieApp</Title>
+      </LinkComponent>
     )
 } 

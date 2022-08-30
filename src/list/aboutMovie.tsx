@@ -101,7 +101,7 @@ const Overview = styled.p`
 
 `
 export default function AboutMovie({ item,  onAddToFavorite }: IAboutItem) {
-
+  console.log(item)
   return (   
     <Container>
       <Background url={'https://image.tmdb.org/t/p/w1280/' + item.backdrop_path}/>

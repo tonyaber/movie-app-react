@@ -5,8 +5,9 @@ import { IFavorite } from "../dto";
 
 
 export default function FavoriteButton({onFavoriteClick}:IFavorite) {
-    return (
-       <button  onClick={()=>onFavoriteClick()}>Favorite Movies</button>
-     
+  return (
+      <Link to='/favorite'>
+        <button  onClick={()=>onFavoriteClick()}>Favorite Movies</button>
+      </Link>
     )
 } 
