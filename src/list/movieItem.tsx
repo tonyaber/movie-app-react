@@ -10,10 +10,9 @@ const Image = styled.img`
 
 export default function MovieItem({ item, onSelect }: IItem) {
   return (
-    <Link to={"/movie" + item.id} onClick={()=>onSelect()} >
-      <p>{item.title}</p>
-      <Image src = {'https://image.tmdb.org/t/p/w500/' + item.poster_path}/>
-      
+    <Link to={"/movie" + item.id} onClick={() => onSelect()} >   
+        <p>{item.title}</p>
+        <Image src = {'https://image.tmdb.org/t/p/w500/' + item.poster_path}/>           
     </Link>
     )
 } 

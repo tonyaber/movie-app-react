@@ -1,16 +1,15 @@
 import React from "react";
 import Logo from './logo';
 import SearchPanel from './searchPanel';
-import RandomFilm from './randomFilm';
-import { IRandom, ISearchPanel } from "../dto";
+import FavoriteButton from './favoriteButton';
+import { IPopularMovie, ISearchPanel } from "../dto";
 
-export default function Header({onRandom, onSearchPanel}:IRandom&ISearchPanel){
+export default function Header( {onPopularMovie,onSearchPanel}:ISearchPanel&IPopularMovie){
   return (
       <>
-        <Logo/>
-        <SearchPanel onSearchPanel={(text)=>onSearchPanel(text)} />
-        <br/>
-      <RandomFilm onRandom={ (randomId)=>onRandom(randomId)} />
+      <Logo onPopularMovie={()=>onPopularMovie() } />
+        
+      {/* <RandomFilm onRandom={ (randomId)=>onRandom(randomId)} /> */}
       </>
     )
 } 

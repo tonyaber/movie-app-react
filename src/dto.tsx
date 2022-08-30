@@ -13,9 +13,12 @@ export interface IMovieItem {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  runtime: number;
+  tagline: string;
+  favorite: boolean;
 }
 export interface IItem{
-  item: IMovieItem
+  item: IMovieItem;
   onSelect: () => void;
 }
 
@@ -24,13 +27,18 @@ export interface IMovieList{
   onSelect: (id: number) => void;
 }
 export interface IAboutItem{
-  item: IMovieItem
+  item: IMovieItem;
+  onAddToFavorite: (id:number) => void;
 }
 
-export interface IRandom {
-    onRandom: (id: number)=>void
+export interface IFavorite{
+  onFavoriteClick: () => void;
 }
 
 export interface ISearchPanel{
   onSearchPanel: (text: string) => void;
+}
+
+export interface IPopularMovie {
+  onPopularMovie: () => void;
 }
