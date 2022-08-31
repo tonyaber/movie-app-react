@@ -1,8 +1,10 @@
-import { IAboutItem } from '../dto';
+import { IAboutItem, IMovieItem } from '../dto';
 import styled from "styled-components";
 import { Background } from './background';
 import { Poster } from './poster';
 import { Information } from './information';
+import { useParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
 
 const Container = styled.div`
   display: flex;
@@ -15,13 +17,34 @@ const Container = styled.div`
   position: relative; 
 `;
 
-export default function AboutMovie({ item,  onAddToFavorite }: IAboutItem) {
-  console.log(item)
+export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAboutItem) {
+  const [item, setItem] = useState<IMovieItem>(null);
+
+  const { id } = useParams<{id:string}>();
+
+  useEffect(() => {
+    server.getMovie(+id).then((data) => {
+      setItem(data);
+    })
+  }, []);
+
+  const itemWithFavorite = useMemo<IMovieItem>(() => {
+    if (!item) {
+      return null;
+    }
+    const isFavorite = Boolean(favorite.find(it => it === +id));
+    return { ...item, 'favorite': isFavorite };
+  }, [favorite, item]);
+ 
   return (   
     <Container>
-      <Background url={item.backdrop_path}/>
+      {item ?
+        <><Background url={item.backdrop_path}/>
       <Poster url={item.poster_path}/>
-      <Information item={item} onAddToFavorite={ (id)=>onAddToFavorite(id)} />
+      <Information item={itemWithFavorite} onAddToFavorite={ (index)=>onAddToFavorite(index)} />
+        </>
+        :<p style={{ color: "white" }}>Spinner</p>}
+      
     </Container>   
     )
 } 

@@ -12,11 +12,11 @@ const Container = styled.div`
   gap: 50px 0;
 `
 
-export default function List({ movieList, onSelect}:IMovieList) {
+export default function List({ movieList}:IMovieList) {
 
   return (
     <Container>
-      {movieList.map(item => <MovieItem key={item.id} item={item} onSelect={ ()=>onSelect(item.id)} />)}
+      {movieList.map(item => <MovieItem key={item.id} item={item} />)}
     </Container>
     )
 } 

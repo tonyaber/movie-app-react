@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IAboutItem } from "../dto";
+import { IInformation } from "../dto";
 import { Title } from './title';
 import { Tagline } from './tagline';
 import { Feature } from './feature';
@@ -32,7 +32,7 @@ const InfoStyled = styled.div`
   z-index:1;
 `;
 
-export function Information({item, onAddToFavorite}:IAboutItem){
+export function Information({item, onAddToFavorite}:IInformation){
   return (
     <InfoStyled>
       <Title title={item.title} />

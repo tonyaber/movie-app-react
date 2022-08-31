@@ -20,10 +20,10 @@ const LinkComponent = styled(Link)`
   }
 `
 
-export default function MovieItem({ item, onSelect }: IItem) {
+export default function MovieItem({ item }: IItem) {
   return (
     <Container>
-      <LinkComponent to={"/movie" + item.id} onClick={() => onSelect()} > 
+      <LinkComponent to={"/movie/" + item.id} > 
         <p>{item.title}</p>
         <Image src = {'https://image.tmdb.org/t/p/w500/' + item.poster_path}/>      
       </LinkComponent>

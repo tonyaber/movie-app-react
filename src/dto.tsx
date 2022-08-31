@@ -1,3 +1,5 @@
+import MovieService from "./service/movieService";
+
 export interface IMovieItem {
   adult: boolean;
   backdrop_path: string;
@@ -19,20 +21,20 @@ export interface IMovieItem {
 }
 export interface IItem{
   item: IMovieItem;
-  onSelect: () => void;
 }
 
 export interface IMovieList{
   movieList: Array<IMovieItem>
-  onSelect: (id: number) => void;
 }
 export interface IAboutItem{
-  item: IMovieItem;
-  onAddToFavorite: (id:number) => void;
+  server: MovieService;
+  onAddToFavorite: (id: number) => void;
+  favorite: number[];
 }
 
-export interface IFavorite{
-  onFavoriteClick: () => void;
+export interface IInformation{
+  item: IMovieItem;
+  onAddToFavorite: (id:number) => void;
 }
 
 export interface ISearchPanel{

@@ -2,13 +2,13 @@ import React from "react";
 import Logo from './logo';
 import SearchPanel from './searchPanel';
 import FavoriteButton from './favoriteButton';
-import { IFavorite, IPopularMovie, ISearchPanel } from "../dto";
+import { IPopularMovie } from "../dto";
 
-export default function Header( {onFavoriteClick, onPopularMovie, }:IPopularMovie&IFavorite){
+export default function Header( {onPopularMovie }:IPopularMovie){
   return (
       <>
       <Logo onPopularMovie={()=>onPopularMovie() } />
-      <FavoriteButton onFavoriteClick={() => onFavoriteClick()} />
+      <FavoriteButton/>
       <br />
       {/* <RandomFilm onRandom={ (randomId)=>onRandom(randomId)} /> */}
       </>
