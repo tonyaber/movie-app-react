@@ -12,27 +12,26 @@ import {
 } from "react-router-dom";
 import SearchPanel from "../header/searchPanel";
 import styled from "styled-components";
-import  Main  from '../main/main2';
+import React from "react";
 
-const Container = styled.div`
-  width:80%;
-  margin: 0 auto;
-`
+interface IMain {
+  popularMovieList: IMovieItem[];
+  movieService: MovieService;
+}
 
-export default function Application() {
-  const [movieList, setMovieList] = useState<Array<IMovieItem>>([]);
-  const [popularMovie, setPopularMovie] = useState<Array<IMovieItem>>([]);
+
+export default function Main({popularMovieList, movieService}:IMain) {
+  const [movieList, setMovieList] = useState<Array<IMovieItem>>([]);  
   const [movieId, setMovieId] = useState<number>(0)
   const [selectMovie, setSelectMovie] = useState<IMovieItem>();
   const [favoriteMovies, setFavoriteMovies] = useState<Array<IMovieItem>>([]);
   const [loading, setLoading] = useState<Boolean>(true);
-  const [error, setError] = useState<Boolean>(false);
-  const movieService = new MovieService();
+  //const [error, setError] = useState<Boolean>(false);
 
   const setMovie = (id: number) => {
     setLoading(true);    
     setMovieId(id);
-    const favorite = Boolean(favoriteMovies.find(it => it.id === id));;    
+    const favorite = Boolean(favoriteMovies.find(it => it.id === id));    
     movieService.getMovie(id).then((data) => {
       setSelectMovie({ ...data, favorite });
       setLoading(false);
@@ -42,7 +41,7 @@ export default function Application() {
   const setMovieSearch = (text: string) => {
     setLoading(true);
     if (!text.length) {      
-      setMovieList(popularMovie);
+      setMovieList(popularMovieList);
       setLoading(false);
       return;
     }
@@ -68,25 +67,17 @@ export default function Application() {
     }
   }
 
-  const onPopularMovieClick = () => {
-    setMovieList(popularMovie);
-    //add cleanSearchPanel
-  }
-
   useEffect(() => {
-    movieService.getPopularMovie()
-      .then(data => {
-        setLoading(false);
-        setMovieList(data);
-         setPopularMovie(data)
-      });
-  }, []);
-  
-    return (
-      <Container>
-        {/* <Main popularMovieList={movieList } movieService={movieService} /> */}
-        <BrowserRouter>
-          <Header onFavoriteClick={() => setMovieList(favoriteMovies)} onPopularMovie={()=>onPopularMovieClick() } />        
+    if (popularMovieList.length) {
+      setMovieList(popularMovieList)
+      setLoading(false);
+    }
+},[popularMovieList])
+
+
+  return (
+    <BrowserRouter>
+          <Header onFavoriteClick={() => setMovieList(favoriteMovies)} onPopularMovie={()=>setMovieList(popularMovieList) } />        
           <Switch>
             <Route exact path='/'>
               <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} />
@@ -96,7 +87,7 @@ export default function Application() {
                 <>    
                   {loading ? <p style={{color: "white"}}>Spinner</p> :
                     <>
-                      <Preview movieList={ popularMovie} />
+                      <Preview movieList={ popularMovieList} />
                       <List movieList={movieList} onSelect={(id) => setMovie(id)} />
                     </>
                   }  
@@ -117,6 +108,5 @@ export default function Application() {
             </Route>
           </Switch>       
         </BrowserRouter>
-      </Container>      
-    )
-} 
+  )
+ }
