@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import Header from '../header/header';
 import Preview from '../preview/preview';
 import List from '../list/list';
-import AboutMovie from '../list/aboutMovie';
+import AboutMovie from '../aboutMovie/aboutMovie';
 import { IMovieItem } from "../dto";
 import MovieService from '../service/movieService';
 import {
@@ -72,10 +72,6 @@ export default function Application() {
     return Boolean(favoriteMovies.find(it => it.id === id));
   }
 
-  const setFavoriteList = () => {
-    setMovieList(favoriteMovies);
-  }
-
   useEffect(() => {
     movieService.getPopularMovie()
       .then(data => {
@@ -88,12 +84,10 @@ export default function Application() {
     return (
       <Container>
         <BrowserRouter>
-          <Header onFavoriteClick={() => setFavoriteList()} onPopularMovie={()=>setMovieList(popularMovie) } />        
+          <Header onFavoriteClick={() => setMovieList(favoriteMovies)} onPopularMovie={()=>setMovieList(popularMovie) } />        
           <Switch>
             <Route exact path='/'>
-              <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} /> 
-              <br/>
-
+              <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} />
               <br/>
               {!movieList.length&&!loading?
                 <p style={{color: "white"}}>Nothing</p> :
@@ -102,13 +96,15 @@ export default function Application() {
                     <>
                       <Preview />
                       <List movieList={movieList} onSelect={(id) => setMovie(id)} />
-                    </>}  
+                    </>
+                  }  
                 </>
               }              
             </Route>
             <Route exact path={'/movie' + movieId}>
-              {/* {error?<p>error</p>:null} */}
-              {loading ? <p style={{color: "white"}}>Spinner</p> : <AboutMovie item={selectMovie}  onAddToFavorite={(id)=>addToFavorite(id) }  />}     
+              {loading ?
+                <p style={{ color: "white" }}>Spinner</p> :
+                <AboutMovie item={selectMovie} onAddToFavorite={(id) => addToFavorite(id)} />}     
             </Route>
             <Route exact path='/favorite'>
               {!movieList.length && !loading ?
@@ -116,7 +112,6 @@ export default function Application() {
                 <>
                   {loading ? <p>Spinner</p> : <List movieList={movieList} onSelect={(id) => setMovie(id)} />}
                 </>}
-
             </Route>
           </Switch>       
         </BrowserRouter>
