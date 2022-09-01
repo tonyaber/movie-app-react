@@ -5,7 +5,7 @@ import MovieItem from './movieItem';
 
 
 const Container = styled.div`
-  width: 80%;  
+  width: 100%;  
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

@@ -21,7 +21,6 @@ const Container = styled.div`
 export default function Application() {
   const [movieList, setMovieList] = useState<Array<IMovieItem>>([]);
   const [popularMovie, setPopularMovie] = useState<Array<IMovieItem>>([]);
-  const [movieId, setMovieId] = useState<number>(0)
   const [selectMovie, setSelectMovie] = useState<IMovieItem>();
   const [favoriteMovies, setFavoriteMovies] = useState<Array<IMovieItem>>([]);
   const [loading, setLoading] = useState<Boolean>(true);
@@ -74,7 +73,6 @@ export default function Application() {
   
     return (
       <Container>
-        {/* <Main popularMovieList={movieList } movieService={movieService} /> */}
         <BrowserRouter>
           <Header onPopularMovie={()=>onPopularMovieClick() } />        
           <Switch>
@@ -86,7 +84,7 @@ export default function Application() {
                 <>    
                   {loading ? <p style={{color: "white"}}>Spinner</p> :
                     <>
-                      {/* <Preview movieList={ popularMovie} /> */}
+                      <Preview movieList={ popularMovie.slice(0,5)} />
                       <List movieList={movieList}  />
                     </>
                   }  
