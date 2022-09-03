@@ -10,12 +10,18 @@ const Button = styled.button`
   top:20px;
   right: 20px;
   z-index: 2;
-  `
+  border: none; 
+  outline: none;
+  background: none;
+  &:active{
+    color: red;
+  }
+`
 
 export default function ArrowLeft({onArrowLeft}:IArrowLeft) {
   return (
     <>
-      <Button onClick = {()=>onArrowLeft()}>Arrow Left</Button>
+      <Button onClick = {()=>onArrowLeft()}>ᐊ</Button>
     </>
   )
 }

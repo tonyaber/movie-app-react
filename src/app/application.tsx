@@ -12,6 +12,8 @@ import {
 } from "react-router-dom";
 import SearchPanel from "../header/searchPanel";
 import styled from "styled-components";
+import Model from '../model/model'
+import Controller from '../controller/controller';
 
 const Container = styled.div`
   width:80%;
@@ -27,6 +29,8 @@ export default function Application() {
   const [error, setError] = useState<Boolean>(false);
 
   const movieService = new MovieService();
+  // const model = new Model();
+  // const controller = new Controller(model, movieService);
   
   const setMovieSearch = (text: string) => {
     setLoading(true);
@@ -62,6 +66,8 @@ export default function Application() {
     //add cleanSearchPanel
   }
 
+
+
   useEffect(() => {
     movieService.getPopularMovie()
       .then(data => {
@@ -85,7 +91,7 @@ export default function Application() {
                   {loading ? <p style={{color: "white"}}>Spinner</p> :
                     <>
                       <Preview movieList={ popularMovie.slice(0,5)} />
-                      <List movieList={movieList}  />
+                      <List movieList={popularMovie}  />
                     </>
                   }  
                 </>

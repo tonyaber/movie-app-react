@@ -13,7 +13,7 @@ const Container = styled.div`
 `
 
 export default function List({ movieList}:IMovieList) {
-
+  console.log(movieList)
   return (
     <Container>
       {movieList.map(item => <MovieItem key={item.id} item={item} />)}

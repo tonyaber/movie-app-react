@@ -12,9 +12,10 @@ interface IPreview{
 
 const Container = styled.div`
   overflow: hidden;
-  position: relative;
-  width: 100%;
-  max-width: 1280px;`
+  position: relative;`
+  /* width: 100%; */
+  /* max-width: 1280px; */
+
 
 export default function Preview({ movieList }: IPreview) {
   const [slide, setSlider] = useState<number>(0);
@@ -31,9 +32,7 @@ export default function Preview({ movieList }: IPreview) {
   }
 
   useEffect(() => {
-    console.log('outTimer')
     const timer  = setInterval(() => {
-      console.log('InTimer')
       changeSlider(1);
     }, 5000);
    return ()=> clearInterval(timer);
