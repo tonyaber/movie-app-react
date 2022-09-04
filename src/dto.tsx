@@ -39,6 +39,7 @@ export interface IInformation{
 
 export interface ISearchPanel{
   onSearchPanel: (text: string) => void;
+  value: string;
 }
 
 export interface IPopularMovie {

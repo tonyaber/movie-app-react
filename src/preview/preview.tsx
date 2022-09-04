@@ -13,10 +13,8 @@ interface IPreview{
 const Container = styled.div`
   overflow: hidden;
   position: relative;
-  margin-top: 50px;
-`
-
-
+  margin-top: 20px;
+`;
 
 export default function Preview({ movieList }: IPreview) {
   const [slide, setSlider] = useState<number>(0);

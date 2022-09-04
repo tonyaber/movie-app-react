@@ -15,7 +15,7 @@ interface ISliderContainer{
 const SliderContainer = styled.div<ISliderContainer>`
   display: flex;
   width: 100%;
-  height: 500px;
+  height: 400px;
   transform: translateX(calc(${props => props.slideNumber} * 100%));
   transition: transform 0.5s ease-in-out;
 `

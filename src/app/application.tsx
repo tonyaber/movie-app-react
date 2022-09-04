@@ -17,7 +17,7 @@ import Controller from '../controller/controller';
 
 const Container = styled.div`
   width:80%;
-  margin: 0 auto;
+  margin: 100px auto 0;
 `
 
 export default function Application() {
@@ -27,6 +27,7 @@ export default function Application() {
   const [favoriteMovies, setFavoriteMovies] = useState<Array<IMovieItem>>([]);
   const [loading, setLoading] = useState<Boolean>(true);
   const [error, setError] = useState<Boolean>(false);
+  const [search, setSearch] = useState<string>('');
 
   const movieService = new MovieService();
   // const model = new Model();
@@ -34,14 +35,17 @@ export default function Application() {
   
   const setMovieSearch = (text: string) => {
     setLoading(true);
+    setSearch(text)
     if (!text.length) {      
       setMovieList(popularMovie);
       setLoading(false);
+      setSearch('')
       return;
     }
+   
     movieService.getMovieSearch(text).then((data) => {
       setLoading(false);
-      setMovieList(data);
+      setMovieList(data);      
      })
   }
 
@@ -63,6 +67,7 @@ export default function Application() {
 
   const onPopularMovieClick = () => {
     setMovieList(popularMovie);
+    setSearch('')
     //add cleanSearchPanel
   }
 
@@ -83,15 +88,14 @@ export default function Application() {
           <Header onPopularMovie={()=>onPopularMovieClick() } />        
           <Switch>
             <Route exact path='/'>
-              <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} />
-              <br/>
+              <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={ search} />
               {!movieList.length&&!loading?
                 <p style={{color: "white"}}>Nothing</p> :
                 <>    
                   {loading ? <p style={{color: "white"}}>Spinner</p> :
                     <>
-                      <Preview movieList={ popularMovie.slice(0,5)} />
-                      <List movieList={popularMovie}  />
+                      {!search.length?<Preview movieList={ popularMovie.slice(0,5)} />:null}
+                      <List movieList={movieList}  />
                     </>
                   }  
                 </>

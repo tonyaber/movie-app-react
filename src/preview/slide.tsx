@@ -16,11 +16,11 @@ const SlideContainer = styled.div`
   z-index: 1;
   position: relative;
   display: flex;
+  justify-content: space-between;
 `
 
 const Image = styled.img`
   max-height: 500px;
-  width: 70%;
   object-fit: contain;
   filter: brightness(90%);
   transform: translateY(-20%);
