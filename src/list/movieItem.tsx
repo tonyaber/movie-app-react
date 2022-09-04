@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Image = styled.img`
-  width: 150px;
+  width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
@@ -13,23 +13,33 @@ const Image = styled.img`
 const Title = styled.h3`
   display:block;
   margin: 0 auto;
-  width: 150px;
+  width: 100%;
   text-align: center;
   font-size: 20px;
+  height: 60px;
 `
 
 const Container = styled.div`
-  width: calc((100% - 80px) / 5);
+  width: calc((100% - 160px) / 5);
+  overflow: hidden;
+  position: relative;
+   transition: 0.5s ease-in;
+  &:hover{
+    transform: scale(1.2);
+  }
 `
 const LinkComponent = styled(Link)`
   color: white;
   text-decoration: none;
+ 
 
   &:hover, &:focus, &:active{
     color: white;
     text-decoration: none;
   }
 `
+
+
 
 export default function MovieItem({ item }: IItem) {
   return (

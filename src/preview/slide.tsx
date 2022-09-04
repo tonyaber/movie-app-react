@@ -39,20 +39,24 @@ const Title = styled.h3`
 `
 
 const LinkComponent = styled(Link)`
-display: block;
-margin: 20px auto;
-padding: 5px;
-background-color: red;
-border-radius: 10px;
+  display: block;
+  margin: 20px auto;
+  padding: 5px;
+  background-color: red;
+  border-radius: 10px;
   color: white;
   text-decoration: none;
   width: 150px;
   text-align: center;
+  transition: 0.5s ease-in;
 
   &:hover, &:focus, &:active{
     color: white;
     text-decoration: none;
   }
+   &:hover{
+    transform: scale(1.2);
+  } 
 `
 
 export default function Slide({ item }: ISlide) {

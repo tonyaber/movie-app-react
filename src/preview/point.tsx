@@ -15,8 +15,11 @@ const PointContainer = styled.div<IPointContainer>`
   height: 10px;
   background: ${props => props.color};
   z-index:2;
-  margin-top: 10px;
+  margin-top: 15px;
 
+   &:hover{
+    transform: scale(1.5);
+  } 
 `
 
 export default function Point({ activeSlider, slide, onPointClick }: IPoint) { 

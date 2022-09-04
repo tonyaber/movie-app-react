@@ -13,6 +13,9 @@ const Button = styled.button`
   border: none; 
   outline: none;
   background: none;
+  &:hover{
+    transform: scale(1.5);
+  } 
   &:active{
     color: red;
   }

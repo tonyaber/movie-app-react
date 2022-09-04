@@ -9,6 +9,11 @@ const Button = styled.button`
   background: none;
   border: 1px solid white;
   border-radius: 10px;
+  transition: 0.5s ease-in;
+  cursor:pointer;
+  &:hover{
+    transform: scale(1.2);
+  } 
 `
 
 export default function FavoriteButton() {

@@ -16,6 +16,10 @@ const Button = styled.button`
   &:active{
     color: red;
   }
+  
+   &:hover{
+    transform: scale(1.5);
+  } 
 `
 
 export default function ArrowLeft({onArrowLeft}:IArrowLeft) {
