@@ -7,7 +7,7 @@ interface IArrowRight {
 
 const Button = styled.button`
   position: absolute;
-  top:50px;
+  top:40px;
   right: 20px;
   z-index: 2;
   border: none; 

@@ -7,7 +7,7 @@ interface IFeature {
 }
 
 const FeatureStyled = styled.div`
-   margin-top: 10px;
+   margin: 10px 0;
   display: flex;
   align-items: center;
   gap: 10px;

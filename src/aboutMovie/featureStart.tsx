@@ -7,11 +7,12 @@ interface IFeature {
 }
 
 const FeaturesStyled = styled.div`
-  margin-top: 10px;
+  margin: 10px 0;
   display: flex;
   align-items: center;
   gap: 10px;
   justify-content: right;
+
 `;
 
 const FeaturesIcon = styled.img`

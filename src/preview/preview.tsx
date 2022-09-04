@@ -12,9 +12,10 @@ interface IPreview{
 
 const Container = styled.div`
   overflow: hidden;
-  position: relative;`
-  /* width: 100%; */
-  /* max-width: 1280px; */
+  position: relative;
+  margin-top: 50px;
+`
+
 
 
 export default function Preview({ movieList }: IPreview) {

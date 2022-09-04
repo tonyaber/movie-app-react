@@ -7,6 +7,7 @@ interface IOverview {
 
 const OverviewStyled = styled.p`
   text-align: center;
+  margin-top: 20px;
 `;
 
 export function Overview({text}:IOverview){
