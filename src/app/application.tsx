@@ -13,6 +13,8 @@ import {
 } from "react-router-dom";
 import SearchPanel from "../header/searchPanel";
 import styled from "styled-components";
+import Empty from '../empty/empty'
+import Error from '../error/error';
 import Model from '../model/model'
 import Controller from '../controller/controller';
 
@@ -91,7 +93,7 @@ export default function Application() {
             <Route exact path='/'>
               <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={ search} />
               {!movieList.length&&!loading?
-                <p style={{color: "white"}}>Nothing</p> :
+                <Empty/> :
                 <>    
                   {loading ? <Spinner /> :
                     <>
@@ -109,7 +111,7 @@ export default function Application() {
             </Route>
             <Route exact path='/favorite'>
               {!favoriteMovies.length ?
-                <p style={{ color: "white" }}>Nothing</p> :             
+                <Empty/> :             
                 <List movieList={favoriteMovies} />
               }
             </Route>

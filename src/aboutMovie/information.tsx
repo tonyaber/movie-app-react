@@ -10,7 +10,7 @@ import { FavoriteButton } from './favoriteButton';
 import { Button } from '../preview/button';
 import star from '../assets/svg/star.svg';
 import clock from '../assets/svg/clock.svg';
-import calendar from '../assets/svg/calendar.svg'
+import calendar from '../assets/svg/calendar.svg';
 import heart from '../assets/svg/heart.svg';
 import disableHeart from '../assets/svg/disable_heart.svg';
 import { formatTime, formatDate } from '../utils/format';
