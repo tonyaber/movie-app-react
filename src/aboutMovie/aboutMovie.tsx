@@ -6,6 +6,8 @@ import { Information } from './information';
 import { useParams } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
 import Spinner from '../spinner/spinner';
+import Error from '../error/error'
+import LoadingSpinner from '../spinner/spinner';
 
 const Container = styled.div`
   display: flex;
@@ -20,12 +22,18 @@ const Container = styled.div`
 
 export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAboutItem) {
   const [item, setItem] = useState<IMovieItem>(null);
-
+  const [loading, setLoading] = useState<Boolean>(true);
+  const [error, setError] = useState<Boolean>(false);
+  
   const { id } = useParams<{id:string}>();
 
   useEffect(() => {
     server.getMovie(+id).then((data) => {
       setItem(data);
+      setLoading(false);
+    })
+      .catch(() => {
+        setError(true);
     })
   }, []);
 
@@ -39,12 +47,14 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
  
   return (   
     <Container>
-      {item ?
-        <><Background url={item.backdrop_path} />
-          <Poster url={item.poster_path} />
-          <Information item={itemWithFavorite} onAddToFavorite={(index) => onAddToFavorite(index)} />
-        </>
-        : <Spinner />}      
+      {error ? <Error /> :
+        loading ? <Spinner /> :
+          <>
+            <Background url={item.backdrop_path} />
+            <Poster url={item.poster_path} />
+            <Information item={itemWithFavorite} onAddToFavorite={(index) => onAddToFavorite(index)} />
+          </>
+        }      
     </Container>   
     )
 } 

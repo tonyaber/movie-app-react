@@ -49,7 +49,10 @@ export default function Application() {
     movieService.getMovieSearch(text).then((data) => {
       setLoading(false);
       setMovieList(data);      
-     })
+    })
+      .catch(() => {
+        setError(true);
+    })
   }
 
   const addToFavorite = (id: number) => {
@@ -59,6 +62,9 @@ export default function Application() {
         setSelectMovie({ ...selectMovie, 'favorite': true});
         setFavoriteMovies((favoriteMovies)=>[...favoriteMovies, data]);        
       })
+      .catch(() => {
+        setError(true);
+    })
     } else {
       setFavoriteMovies((favoriteMovies) => {
         favoriteMovies.splice(index, 1);
@@ -82,7 +88,10 @@ export default function Application() {
         setLoading(false);
         setMovieList(data);
         setPopularMovie(data);
-      });
+      })
+      .catch(() => {
+        setError(true);
+    });
   }, []);
   
     return (
@@ -91,29 +100,34 @@ export default function Application() {
           <Header onPopularMovie={()=>onPopularMovieClick() } />        
           <Switch>
             <Route exact path='/'>
-              <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={ search} />
-              {!movieList.length&&!loading?
-                <Empty/> :
-                <>    
-                  {loading ? <Spinner /> :
+              <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={search} />
+              {error ? <Error /> :
+                <>
+                  {!movieList.length && !loading ?
+                    <Empty /> :
                     <>
-                      {!search.length ? <Preview movieList={popularMovie.slice(0, 5)} /> : null}
-                      <List movieList={movieList} />
-                      
+                      {loading ? <Spinner /> :
+                        <>
+                          {!search.length ? <Preview movieList={popularMovie.slice(0, 5)} /> : null}
+                          <List movieList={movieList} />                      
+                        </>
+                      }
                     </>
-                  }  
+                  }
                 </>
               }              
             </Route>
             <Route exact path={'/movie/:id'}>
-
               <AboutMovie server={movieService} onAddToFavorite={(id) => addToFavorite(id)} favorite={favoriteMovies.map(it=>it.id)}/>    
             </Route>
             <Route exact path='/favorite'>
-              {!favoriteMovies.length ?
-                <Empty/> :             
-                <List movieList={favoriteMovies} />
-              }
+              {error ? <Error /> :
+                <>
+                  {!favoriteMovies.length ?
+                    <Empty/> :             
+                    <List movieList={favoriteMovies} />
+                  }
+                </>}
             </Route>
           </Switch>       
         </BrowserRouter>

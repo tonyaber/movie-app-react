@@ -8,6 +8,10 @@ const PosterStyled = styled.img`
   width: 200px;
   height: 300px;
   z-index:1;
+  transition: 0.5s ease-in;
+  &:hover{
+    transform: scale(1.2);
+  }
 `;
 
 export function Poster({url}:IPoster){

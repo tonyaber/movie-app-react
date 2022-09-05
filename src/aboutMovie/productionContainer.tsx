@@ -18,7 +18,7 @@ const Container = styled.div`
 export function ProductionContainer({url}:IProductionContainer){
   return (
     <Container>
-      {url.map(it=><ProductionIcon url={it}/>)}
+      {url.map((it,i)=><ProductionIcon key={i} url={it}/>)}
     </Container>
   )
 }
