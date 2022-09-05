@@ -18,6 +18,7 @@ const BackgroundContainer = styled.img<IBackground>`
   background-size: cover; 
   filter: blur(3px) brightness(60%);
   z-index:0;
+  border-radius: 15px;
 `
 
 export function Background({url}:IBackground){

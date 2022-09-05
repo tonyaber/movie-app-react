@@ -1,4 +1,4 @@
-import { IAboutItem, IMovieItem } from '../dto';
+import { IAboutItem, IActor, IMovieItem } from '../dto';
 import styled from "styled-components";
 import { Background } from './background';
 import { Poster } from './poster';
@@ -7,9 +7,14 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
 import Spinner from '../spinner/spinner';
 import Error from '../error/error'
+import Actors from './actors';
 import LoadingSpinner from '../spinner/spinner';
 
 const Container = styled.div`
+  margin-top:200px;
+`
+
+const ContainerAboutFilm = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -24,17 +29,18 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
   const [item, setItem] = useState<IMovieItem>(null);
   const [loading, setLoading] = useState<Boolean>(true);
   const [error, setError] = useState<Boolean>(false);
+  const [actors,setActors] = useState<IActor[]>(null)
   
   const { id } = useParams<{id:string}>();
 
   useEffect(() => {
-    server.getMovie(+id).then((data) => {
-      setItem(data);
+    Promise.all([server.getMovie(+id), server.getActors(+id)]).then((data) => {
+      setItem(data[0]);
+      setActors(data[1].cast);
       setLoading(false);
-    })
-      .catch(() => {
+    }).catch(() => {
         setError(true);
-    })
+      });
   }, []);
 
   const itemWithFavorite = useMemo<IMovieItem>(() => {
@@ -44,16 +50,21 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
     const isFavorite = Boolean(favorite.find(it => it === +id));
     return { ...item, 'favorite': isFavorite };
   }, [favorite, item]);
- 
+
+  
   return (   
     <Container>
       {error ? <Error /> :
         loading ? <Spinner /> :
           <>
-            <Background url={item.backdrop_path} />
-            <Poster url={item.poster_path} />
-            <Information item={itemWithFavorite} onAddToFavorite={(index) => onAddToFavorite(index)} />
+            <ContainerAboutFilm>
+              <Background url={item.backdrop_path} />
+              <Poster url={item.poster_path} />
+              <Information item={itemWithFavorite} onAddToFavorite={(index) => onAddToFavorite(index)} />
+            </ContainerAboutFilm>
+            <Actors items={actors.filter(it => it.profile_path != null)} />
           </>
+         
         }      
     </Container>   
     )

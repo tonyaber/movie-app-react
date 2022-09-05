@@ -23,4 +23,8 @@ export default class MovieService {
         return this.getResource(`${this._apiBase}3/search/movie?${this._apiKey}&query=${text}&page=1&include_adult=false`).then(data => data.results);
     }
 
+    getActors = (id:number) => {
+        return this.getResource(` ${this._apiBase}3/movie/${id}/credits?${this._apiKey}&append_to_response=videos`)
+    }
+
 }
