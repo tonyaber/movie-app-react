@@ -3,6 +3,7 @@ import Header from '../header/header';
 import Preview from '../preview/preview';
 import List from '../list/list';
 import AboutMovie from '../aboutMovie/aboutMovie';
+import Spinner from '../spinner/spinner';
 import { IMovieItem } from "../dto";
 import MovieService from '../service/movieService';
 import {
@@ -92,10 +93,11 @@ export default function Application() {
               {!movieList.length&&!loading?
                 <p style={{color: "white"}}>Nothing</p> :
                 <>    
-                  {loading ? <p style={{color: "white"}}>Spinner</p> :
+                  {loading ? <Spinner /> :
                     <>
-                      {!search.length?<Preview movieList={ popularMovie.slice(0,5)} />:null}
-                      <List movieList={movieList}  />
+                      {!search.length ? <Preview movieList={popularMovie.slice(0, 5)} /> : null}
+                      <List movieList={movieList} />
+                      
                     </>
                   }  
                 </>

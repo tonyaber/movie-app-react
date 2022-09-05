@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 interface IFeature {
   text: number|string;
@@ -12,8 +12,10 @@ const FeaturesStyled = styled.div`
   align-items: center;
   gap: 10px;
   justify-content: right;
-
+   transition: .2s all;
+  overflow: hidden;
 `;
+
 
 const FeaturesIcon = styled.img`
   width: 30px;
@@ -26,7 +28,7 @@ export function FeatureStart({text, url}:IFeature){
   return (
     <FeaturesStyled>
       {text}
-      <FeaturesIcon src={url}/> 
+      <FeaturesIcon src={url} /> 
     </FeaturesStyled>
   )
 }

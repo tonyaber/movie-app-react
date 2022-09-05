@@ -6,6 +6,7 @@ import {Overview} from '../aboutMovie/overview';
 import {formatDate, formatTime} from '../utils/format';
 import { FeatureStart } from "../aboutMovie/featureStart";
 import { Link } from "react-router-dom";
+import { Button } from './button';
 
 interface ISlide{
   item: IMovieItem;
@@ -39,24 +40,7 @@ const Title = styled.h3`
 `
 
 const LinkComponent = styled(Link)`
-  display: block;
-  margin: 20px auto;
-  padding: 5px;
-  background-color: red;
-  border-radius: 10px;
-  color: white;
-  text-decoration: none;
-  width: 150px;
-  text-align: center;
-  transition: 0.5s ease-in;
 
-  &:hover, &:focus, &:active{
-    color: white;
-    text-decoration: none;
-  }
-   &:hover{
-    transform: scale(1.2);
-  } 
 `
 
 export default function Slide({ item }: ISlide) {
@@ -68,7 +52,7 @@ export default function Slide({ item }: ISlide) {
         <Title>{item.title}</Title>
         <FeatureStart text={item.vote_average.toFixed(1)} url={ star} />
         <Overview text={overview} />
-        <LinkComponent to={"/movie/" + item.id}>More Information</LinkComponent>
+        <Link to={"/movie/" + item.id}><Button text={"More Information "} /></Link>
       </Information>
       
       

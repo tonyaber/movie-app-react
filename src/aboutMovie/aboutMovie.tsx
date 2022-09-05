@@ -5,6 +5,7 @@ import { Poster } from './poster';
 import { Information } from './information';
 import { useParams } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
+import Spinner from '../spinner/spinner';
 
 const Container = styled.div`
   display: flex;
@@ -39,12 +40,11 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
   return (   
     <Container>
       {item ?
-        <><Background url={item.backdrop_path}/>
-      <Poster url={item.poster_path}/>
-      <Information item={itemWithFavorite} onAddToFavorite={ (index)=>onAddToFavorite(index)} />
+        <><Background url={item.backdrop_path} />
+          <Poster url={item.poster_path} />
+          <Information item={itemWithFavorite} onAddToFavorite={(index) => onAddToFavorite(index)} />
         </>
-        :<p style={{ color: "white" }}>Spinner</p>}
-      
+        : <Spinner />}      
     </Container>   
     )
 } 

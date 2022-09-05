@@ -18,6 +18,10 @@ export interface IMovieItem {
   runtime: number;
   tagline: string;
   favorite: boolean;
+  production_companies: {
+    id: number,
+    logo_path: string,
+  }[]
 }
 export interface IItem{
   item: IMovieItem;
