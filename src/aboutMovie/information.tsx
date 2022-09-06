@@ -25,7 +25,7 @@ const InfoStyled = styled.div`
 
 export function Information({ item, onAddToFavorite }: IInformation) {
   console.log(item)
-  const productionCompanies = item.production_companies.map(it => it.logo_path).filter(it => it != null);
+  const productionCompanies = item.production_companies.slice().map(it => it.logo_path).filter(it => it != null);
   return (
     <InfoStyled>
       <Title title={item.title} />

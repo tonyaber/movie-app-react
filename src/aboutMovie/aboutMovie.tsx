@@ -10,9 +10,6 @@ import Error from '../error/error'
 import Actors from './actors';
 import LoadingSpinner from '../spinner/spinner';
 
-const Container = styled.div`
-  margin-top:200px;
-`
 
 const ContainerAboutFilm = styled.div`
   display: flex;
@@ -36,7 +33,7 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
   useEffect(() => {
     Promise.all([server.getMovie(+id), server.getActors(+id)]).then((data) => {
       setItem(data[0]);
-      setActors(data[1].cast);
+      setActors(data[1].cast.slice());
       setLoading(false);
     }).catch(() => {
         setError(true);
@@ -53,7 +50,7 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
 
   
   return (   
-    <Container>
+    <>
       {error ? <Error /> :
         loading ? <Spinner /> :
           <>
@@ -62,11 +59,11 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
               <Poster url={item.poster_path} />
               <Information item={itemWithFavorite} onAddToFavorite={(index) => onAddToFavorite(index)} />
             </ContainerAboutFilm>
-            <Actors items={actors.filter(it => it.profile_path != null)} />
+            <Actors items={actors.filter(it => it.profile_path != null).slice(0,10)} />
           </>
          
         }      
-    </Container>   
+    </>   
     )
 } 
 

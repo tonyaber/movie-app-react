@@ -118,7 +118,7 @@ export default function Application() {
               }              
             </Route>
             <Route exact path={'/movie/:id'}>
-              <AboutMovie server={movieService} onAddToFavorite={(id) => addToFavorite(id)} favorite={favoriteMovies.map(it=>it.id)}/>    
+              <AboutMovie server={movieService} onAddToFavorite={(id) => addToFavorite(id)} favorite={favoriteMovies.slice().map(it=>it.id)}/>    
             </Route>
             <Route exact path='/favorite'>
               {error ? <Error /> :
