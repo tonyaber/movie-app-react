@@ -1,8 +1,9 @@
-import React, { useState,useEffect, useMemo } from "react";
+import { useState,useEffect } from "react";
 import Header from '../header/header';
 import Preview from '../preview/preview';
 import List from '../list/list';
-import AboutMovie from '../list/aboutMovie';
+import AboutMovie from '../aboutMovie/aboutMovie';
+import Spinner from '../spinner/spinner';
 import { IMovieItem } from "../dto";
 import MovieService from '../service/movieService';
 import {
@@ -10,62 +11,126 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import SearchPanel from "../header/searchPanel";
+import styled from "styled-components";
+import Empty from '../empty/empty'
+import Error from '../error/error';
+import Model from '../model/model'
+import Controller from '../controller/controller';
+
+const Container = styled.div`
+  width:80%;
+  margin: 100px auto 0;
+`
 
 export default function Application() {
   const [movieList, setMovieList] = useState<Array<IMovieItem>>([]);
-  const [movieId, setMovieId] = useState<number>(0)
+  const [popularMovie, setPopularMovie] = useState<Array<IMovieItem>>([]);
   const [selectMovie, setSelectMovie] = useState<IMovieItem>();
+  const [favoriteMovies, setFavoriteMovies] = useState<Array<IMovieItem>>([]);
   const [loading, setLoading] = useState<Boolean>(true);
   const [error, setError] = useState<Boolean>(false);
-  const movieService = new MovieService();
+  const [search, setSearch] = useState<string>('');
 
-  const setMovie = (id:number) => {
-    setLoading(true);    
-    setMovieId(id);
-    movieService.getMovie(id).then((data) => {
-      setSelectMovie(data);
-      setError(false);
-      setLoading(false);      
-    }).catch(() => {
-      setError(true);
-    })
-  };
+  const movieService = new MovieService();
+  // const model = new Model();
+  // const controller = new Controller(model, movieService);
   
-  const setMovieSearch = (text:string) => {
+  const setMovieSearch = (text: string) => {
+    setLoading(true);
+    setSearch(text)
+    if (!text.length) {      
+      setMovieList(popularMovie);
+      setLoading(false);
+      setSearch('')
+      return;
+    }
+   
     movieService.getMovieSearch(text).then((data) => {
       setLoading(false);
-      setMovieList(data);
-     })
+      setMovieList(data);      
+    })
+      .catch(() => {
+        setError(true);
+    })
   }
+
+  const addToFavorite = (id: number) => {
+    const index = favoriteMovies.findIndex(it => it.id === id) 
+    if (index === -1) {
+      movieService.getMovie(id).then((data) => {
+        setSelectMovie({ ...selectMovie, 'favorite': true});
+        setFavoriteMovies((favoriteMovies)=>[...favoriteMovies, data]);        
+      })
+      .catch(() => {
+        setError(true);
+    })
+    } else {
+      setFavoriteMovies((favoriteMovies) => {
+        favoriteMovies.splice(index, 1);
+        setSelectMovie({ ...selectMovie, 'favorite': false});
+        return favoriteMovies;
+      })
+    }
+  }
+
+  const onPopularMovieClick = () => {
+    setMovieList(popularMovie);
+    setSearch('')
+    //add cleanSearchPanel
+  }
+
+
+
   useEffect(() => {
     movieService.getPopularMovie()
       .then(data => {
         setLoading(false);
         setMovieList(data);
-      });
+        setPopularMovie(data);
+      })
+      .catch(() => {
+        setError(true);
+    });
   }, []);
- 
+  
     return (
-      <>
+      <Container>
         <BrowserRouter>
-          <Header onRandom={ (randomId)=>setMovie(randomId)} onSearchPanel = {(text)=>setMovieSearch(text)} />        
+          <Header onPopularMovie={()=>onPopularMovieClick() } />        
           <Switch>
             <Route exact path='/'>
-              {loading ? <p>Spiner</p> :  <Preview />}
-              {!movieList.length&&!loading?
-                <p>Nothing</p> :
-                <>                 
-                  <List movieList={movieList} onSelect={(id)=>setMovie(id)} />
+              <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={search} />
+              {error ? <Error /> :
+                <>
+                  {!movieList.length && !loading ?
+                    <Empty /> :
+                    <>
+                      {loading ? <Spinner /> :
+                        <>
+                          {!search.length ? <Preview movieList={popularMovie.slice(0, 5)} /> : null}
+                          <List movieList={movieList} />                      
+                        </>
+                      }
+                    </>
+                  }
                 </>
-              }
-              
+              }              
             </Route>
-            <Route exact path={'/movie' + movieId}>
-              {error?<p>error</p>:null}
-              {loading?<p>Spiner</p>:<AboutMovie item={selectMovie} />}     
+            <Route exact path={'/movie/:id'}>
+              <AboutMovie server={movieService} onAddToFavorite={(id) => addToFavorite(id)} favorite={favoriteMovies.slice().map(it=>it.id)}/>    
+            </Route>
+            <Route exact path='/favorite'>
+              {error ? <Error /> :
+                <>
+                  {!favoriteMovies.length ?
+                    <Empty/> :             
+                    <List movieList={favoriteMovies} />
+                  }
+                </>}
             </Route>
           </Switch>       
         </BrowserRouter>
-      </>      
+      </Container>      
     )
 } 

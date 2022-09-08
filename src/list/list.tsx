@@ -1,13 +1,22 @@
 import React from "react";
+import styled from "styled-components";
 import { IMovieList } from '../dto';
 import MovieItem from './movieItem';
 
 
-export default function List({ movieList, onSelect}:IMovieList) {
+const Container = styled.div`
+  width: 100%;  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 50px 0;
+`
 
+export default function List({ movieList}:IMovieList) {
+  console.log(movieList)
   return (
-    <>
-      {movieList.map(item => <MovieItem key={item.id} item={item} onSelect={ ()=>onSelect(item.id)} />)}
-    </>
+    <Container>
+      {movieList.map(item => <MovieItem key={item.id} item={item} />)}
+    </Container>
     )
 } 

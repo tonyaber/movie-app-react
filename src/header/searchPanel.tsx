@@ -1,10 +1,22 @@
 import React from "react";
+import styled from "styled-components";
 import { ISearchPanel } from "../dto";
+import search from '../assets/svg/search.svg';
 
-export default function SearchPanel({onSearchPanel}:ISearchPanel){
+const Input = styled.input`
+  display: block;
+  width: 300px;
+  padding: 10px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 20px;
+  background-color: #34213194;
+`;
+
+export default function SearchPanel({onSearchPanel, value}:ISearchPanel){
     return (
       <>
-        <input onChange= {(e)=>onSearchPanel(e.target.value)} type="text"/>
+        <Input onChange={(e) => onSearchPanel(e.target.value)} type="text" placeholder="Search movie..." value={value} />
       </>
     )
 } 
