@@ -14,9 +14,8 @@ import {
 import SearchPanel from "../header/searchPanel";
 import styled from "styled-components";
 import Empty from '../empty/empty'
-import Error from '../error/error';
-import Model from '../model/model'
-import Controller from '../controller/controller';
+import Template from '../template/template';
+import errorImage from '../assets/svg/error-animated.svg';
 
 const Container = styled.div`
   width:80%;
@@ -101,7 +100,7 @@ export default function Application() {
           <Switch>
             <Route exact path='/'>
               <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={search} />
-              {error ? <Error /> :
+              {error ? <Template image={errorImage } text={'Error loading. Please reload the page'} /> :
                 <>
                   {!movieList.length && !loading ?
                     <Empty /> :
@@ -121,13 +120,16 @@ export default function Application() {
               <AboutMovie server={movieService} onAddToFavorite={(id) => addToFavorite(id)} favorite={favoriteMovies.slice().map(it=>it.id)}/>    
             </Route>
             <Route exact path='/favorite'>
-              {error ? <Error /> :
+              {error ? <Template image={errorImage } text={'Error loading. Please reload the page'} />:
                 <>
                   {!favoriteMovies.length ?
                     <Empty/> :             
                     <List movieList={favoriteMovies} />
                   }
                 </>}
+            </Route>
+            <Route path={'/*'}>
+              <Template image={errorImage } text={'Error loading. Please reload the page'} />
             </Route>
           </Switch>       
         </BrowserRouter>

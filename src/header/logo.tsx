@@ -1,15 +1,20 @@
 import React from "react";
-import img from '../assets/svg/tv.svg'
+import icon from '../assets/svg/tv.svg'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IPopularMovie } from "../dto";
+import image from '../assets/svg/film-rolls-animate (3).svg'
 
-const Image = styled.img`
+const Icon = styled.img`
   width: 20px;
   height: auto;
   filter: invert(1);
   margin-right: 10px;
 `;
+
+const Image = styled.img`
+  width: 100px;
+`
 
 const Title = styled.h1`
 `
@@ -28,8 +33,9 @@ const LinkComponent = styled(Link)`
 export default function Logo({onPopularMovie}:IPopularMovie) {
   return (
     <LinkComponent to={"/"} onClick={()=>onPopularMovie()}>
-        <Image src={img} />
-        <Title>MovieApp</Title>
+      <Icon src={icon} />
+      <Title>MovieApp</Title>
+    
       </LinkComponent>
     )
 } 

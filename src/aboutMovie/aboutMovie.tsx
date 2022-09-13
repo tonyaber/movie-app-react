@@ -6,10 +6,10 @@ import { Information } from './information';
 import { useParams } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
 import Spinner from '../spinner/spinner';
-import Error from '../error/error'
 import Actors from './actors';
 import LoadingSpinner from '../spinner/spinner';
-
+import Template from '../template/template';
+import errorImage from '../assets/svg/error-animated.svg';
 
 const ContainerAboutFilm = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
   
   return (   
     <>
-      {error ? <Error /> :
+      {error ? <Template image={errorImage } text={'Error loading. Please reload the page'} /> :
         loading ? <Spinner /> :
           <>
             <ContainerAboutFilm>
