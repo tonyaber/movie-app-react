@@ -17,6 +17,7 @@ import Empty from '../empty/empty'
 import Template from '../template/template';
 import errorImage from '../assets/svg/error-animated.svg';
 import { Helmet } from "react-helmet";
+import GlobalStyles from './global';
 
 const Container = styled.div`
   width:80%;
@@ -152,6 +153,7 @@ export default function Application() {
             </Route>
           </Switch>       
         </BrowserRouter>
+        <GlobalStyles />
       </Container>      
     )
 } 
