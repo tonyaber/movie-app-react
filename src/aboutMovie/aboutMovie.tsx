@@ -10,6 +10,7 @@ import Actors from './actors';
 import LoadingSpinner from '../spinner/spinner';
 import Template from '../template/template';
 import errorImage from '../assets/svg/error-animated.svg';
+import {Helmet} from "react-helmet";
 
 const ContainerAboutFilm = styled.div`
   display: flex;
@@ -54,6 +55,9 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
       {error ? <Template image={errorImage } text={'Error loading. Please reload the page'} /> :
         loading ? <Spinner /> :
           <>
+            <Helmet>
+              <title>{item.title }</title>
+            </Helmet>
             <ContainerAboutFilm>
               <Background url={item.backdrop_path} />
               <Poster url={item.poster_path} />

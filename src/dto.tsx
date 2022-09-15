@@ -43,7 +43,7 @@ export interface IItem{
 }
 
 export interface IMovieList{
-  movieList: Array<IMovieItem>
+  movieList: Array<IMovieItem>;
 }
 export interface IAboutItem{
   server: MovieService;

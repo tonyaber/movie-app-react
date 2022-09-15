@@ -16,6 +16,7 @@ import styled from "styled-components";
 import Empty from '../empty/empty'
 import Template from '../template/template';
 import errorImage from '../assets/svg/error-animated.svg';
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
   width:80%;
@@ -79,7 +80,16 @@ export default function Application() {
     //add cleanSearchPanel
   }
 
-
+  // const getMoreMovie = () => {
+  //     movieService.getMoreMovie()
+  //     .then(data => {
+  //       setMovieList((movies)=>[...movies, ...data]);
+  //       setPopularMovie((movies)=>[...movies, ...data]);
+  //     })
+  //     .catch(() => {
+  //       setError(true);
+  //   });
+  // }
 
   useEffect(() => {
     movieService.getPopularMovie()
@@ -99,6 +109,9 @@ export default function Application() {
           <Header onPopularMovie={()=>onPopularMovieClick() } />        
           <Switch>
             <Route exact path='/'>
+              <Helmet>
+                <title>MovieApp</title>
+              </Helmet>
               <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={search} />
               {error ? <Template image={errorImage } text={'Error loading. Please reload the page'} /> :
                 <>
@@ -120,15 +133,21 @@ export default function Application() {
               <AboutMovie server={movieService} onAddToFavorite={(id) => addToFavorite(id)} favorite={favoriteMovies.slice().map(it=>it.id)}/>    
             </Route>
             <Route exact path='/favorite'>
+              <Helmet>
+                <title>Favorite movie</title>
+              </Helmet>
               {error ? <Template image={errorImage } text={'Error loading. Please reload the page'} />:
                 <>
                   {!favoriteMovies.length ?
                     <Empty/> :             
-                    <List movieList={favoriteMovies} />
+                    <List movieList={favoriteMovies}/>
                   }
                 </>}
             </Route>
             <Route path={'/*'}>
+              <Helmet>
+                <title>Error</title>
+              </Helmet>
               <Template image={errorImage } text={'Error loading. Please reload the page'} />
             </Route>
           </Switch>       
