@@ -18,6 +18,7 @@ import Template from '../template/template';
 import errorImage from '../assets/svg/error-animated.svg';
 import { Helmet } from "react-helmet";
 import GlobalStyles from './global';
+import { setContent } from './setContent';
 
 const Container = styled.div`
   width:80%;
@@ -29,30 +30,30 @@ export default function Application() {
   const [popularMovie, setPopularMovie] = useState<Array<IMovieItem>>([]);
   const [selectMovie, setSelectMovie] = useState<IMovieItem>();
   const [favoriteMovies, setFavoriteMovies] = useState<Array<IMovieItem>>([]);
-  const [loading, setLoading] = useState<Boolean>(true);
-  const [error, setError] = useState<Boolean>(false);
   const [search, setSearch] = useState<string>('');
+  const [process, setProcess] = useState<string>('loading');
 
   const movieService = new MovieService();
   // const model = new Model();
   // const controller = new Controller(model, movieService);
   
   const setMovieSearch = (text: string) => {
-    setLoading(true);
-    setSearch(text)
+    setSearch(text);
+    setProcess('loading')
     if (!text.length) {      
       setMovieList(popularMovie);
-      setLoading(false);
-      setSearch('')
+      setSearch('');
+      setProcess('showMovieList')
       return;
     }
    
     movieService.getMovieSearch(text).then((data) => {
-      setLoading(false);
-      setMovieList(data);      
+      setMovieList(data); 
+      data.length ? setProcess('showSearchList') : setProcess('empty');
+      
     })
       .catch(() => {
-        setError(true);
+        setProcess('error')
     })
   }
 
@@ -63,9 +64,6 @@ export default function Application() {
         setSelectMovie({ ...selectMovie, 'favorite': true});
         setFavoriteMovies((favoriteMovies)=>[...favoriteMovies, data]);        
       })
-      .catch(() => {
-        setError(true);
-    })
     } else {
       setFavoriteMovies((favoriteMovies) => {
         favoriteMovies.splice(index, 1);
@@ -77,7 +75,8 @@ export default function Application() {
 
   const onPopularMovieClick = () => {
     setMovieList(popularMovie);
-    setSearch('')
+    setSearch('');
+    setProcess('showMovieList')
     //add cleanSearchPanel
   }
 
@@ -95,12 +94,12 @@ export default function Application() {
   useEffect(() => {
     movieService.getPopularMovie()
       .then(data => {
-        setLoading(false);
         setMovieList(data);
         setPopularMovie(data);
+        setProcess('showMovieList')
       })
       .catch(() => {
-        setError(true);
+        setProcess('error')
     });
   }, []);
   
@@ -113,22 +112,8 @@ export default function Application() {
               <Helmet>
                 <title>MovieApp</title>
               </Helmet>
-              <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={search} />
-              {error ? <Template image={errorImage } text={'Error loading. Please reload the page'} /> :
-                <>
-                  {!movieList.length && !loading ?
-                    <Empty /> :
-                    <>
-                      {loading ? <Spinner /> :
-                        <>
-                          {!search.length ? <Preview movieList={popularMovie.slice(0, 5)} /> : null}
-                          <List movieList={movieList} />                      
-                        </>
-                      }
-                    </>
-                  }
-                </>
-              }              
+              <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={search} />  
+                {setContent(process,movieList)}
             </Route>
             <Route exact path={'/movie/:id'}>
               <AboutMovie server={movieService} onAddToFavorite={(id) => addToFavorite(id)} favorite={favoriteMovies.slice().map(it=>it.id)}/>    
@@ -136,14 +121,11 @@ export default function Application() {
             <Route exact path='/favorite'>
               <Helmet>
                 <title>Favorite movie</title>
-              </Helmet>
-              {error ? <Template image={errorImage } text={'Error loading. Please reload the page'} />:
-                <>
-                  {!favoriteMovies.length ?
-                    <Empty/> :             
-                    <List movieList={favoriteMovies}/>
-                  }
-                </>}
+              </Helmet>            
+                {!favoriteMovies.length ?
+                  <Empty/> :             
+                  <List movieList={favoriteMovies}/>
+                }
             </Route>
             <Route path={'/*'}>
               <Helmet>

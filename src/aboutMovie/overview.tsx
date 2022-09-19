@@ -10,8 +10,9 @@ const OverviewStyled = styled.p`
   margin-top: 20px;
 `;
 
-export function Overview({text}:IOverview){
+export function Overview({ text }: IOverview) {
+  const overview = text.length < 500 ? text : text.slice(0, 500) + '...';
   return (
-     <OverviewStyled>{text}</OverviewStyled>
+     <OverviewStyled>{overview}</OverviewStyled>
   )
 }

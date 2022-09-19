@@ -29,12 +29,12 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
   const [error, setError] = useState<Boolean>(false);
   const [actors,setActors] = useState<IActor[]>(null)
   
-  const { id } = useParams<{id:string}>();
+  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    Promise.all([server.getMovie(+id), server.getActors(+id)]).then((data) => {
+    Promise.all([server.getMovie(+id), server.getActors(+id)]).then((data: [IMovieItem, { cast: IActor[] }]) => {
       setItem(data[0]);
-      setActors(data[1].cast.slice());
+      setActors(data[1].cast.slice().filter(it => it.profile_path != null).slice(0,10));
       setLoading(false);
     }).catch(() => {
         setError(true);
@@ -63,7 +63,7 @@ export default function AboutMovie({ server,  onAddToFavorite, favorite }: IAbou
               <Poster url={item.poster_path} />
               <Information item={itemWithFavorite} onAddToFavorite={(index) => onAddToFavorite(index)} />
             </ContainerAboutFilm>
-            <Actors items={actors.filter(it => it.profile_path != null).slice(0,10)} />
+            {actors.length ? <Actors items={actors} /> : null}            
           </>
          
         }      

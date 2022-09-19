@@ -23,7 +23,7 @@ const SliderContainer = styled.div<ISliderContainer>`
 export default function Slider({movieList, slideNumber}:ISlider){
   return (
     <SliderContainer slideNumber = {-slideNumber}>
-      {movieList.map(it => <Slide key={it.id} item={ it}/>)}
+      {movieList.map((it,i) => <Slide key={i} item={ it}/>)}
     </SliderContainer>
     )
 } 
