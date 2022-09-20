@@ -34,6 +34,7 @@ export default function Application() {
   const [search, setSearch] = useState<string>('');
   const [process, setProcess] = useState<string>('loading');
   const [page, setPage] = useState<number>(1);
+  const [genre, setGenre] = useState<number>(0);
 
   const movieService = useMemo<MovieService>(()=>new MovieService(),[]);
   // const model = new Model();
@@ -76,6 +77,20 @@ export default function Application() {
     }
   }
 
+  const onGenreClick = (id: number) => {
+    setProcess('loading');
+    setGenre(id);
+    setPage(1);
+    movieService.getMoviesByGenre(id).then((data) => {
+      setMovieList(data);
+      setProcess('showGenreList');
+    })
+      .catch(() => {
+        setProcess('error')
+    })
+    
+  }
+
   const onPopularMovieClick = () => {
     setMovieList(popularMovie);
     setSearch('');
@@ -111,6 +126,13 @@ export default function Application() {
             setMovieList(movies => [...movies, ...data]);
           })
         break;
+      case 'showGenreList':
+        movieService.getMoviesByGenre(genre, page + 1)
+          .then(data => {
+            setPage(page => page + 1)
+            setMovieList(movies => [...movies, ...data]);
+          })
+        break;
     }
   }
   useEffect(() => {
@@ -135,7 +157,7 @@ export default function Application() {
                 <title>MovieApp</title>
               </Helmet>
               <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={search} />  
-                {setContent(process,movieList, onMoreMovie)}
+                {setContent(process,movieList, onMoreMovie, onGenreClick, genre)}
             </Route>
             <Route exact path={'/movie/:id'}>
               <AboutMovie server={movieService} onAddToFavorite={(id) => addToFavorite(id)} favorite={favoriteMovies.slice().map(it=>it.id)}/>    

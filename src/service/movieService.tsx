@@ -5,6 +5,7 @@ export default class MovieService {
     constructor(){
         this._page = 1;
         console.log('constructor')
+        this.getMoviesByGenre(35);
     }
     getResource = async (url: string) => {
         let res = await fetch(url);
@@ -15,8 +16,7 @@ export default class MovieService {
         return await res.json();
     }
 
-    getPopularMovie = (page=1) => {
-        console.log(page)
+    getPopularMovie = (page:number=1) => {
         return this.getResource(`${this._apiBase}3/movie/popular?${this._apiKey}&language=$en-US&page=${page}`).then(data => data.results);
     }
 
@@ -24,7 +24,7 @@ export default class MovieService {
         return this.getResource(`${this._apiBase}3/movie/${id}?${this._apiKey}&language=en-US`);
     }
 
-    getMovieSearch = (text: string, page=1) => { 
+    getMovieSearch = (text: string, page:number=1) => { 
         return this.getResource(`${this._apiBase}3/search/movie?${this._apiKey}&query=${text}&page=${page}&include_adult=false`).then(data => data.results);
     }
 
@@ -32,11 +32,8 @@ export default class MovieService {
         return this.getResource(` ${this._apiBase}3/movie/${id}/credits?${this._apiKey}&append_to_response=videos`)
     }
 
-    getMoreMovie = () => {
-        console.log(this._page)
-        this._page++;
-        console.log(this._page)
-        return this.getPopularMovie();
+    getMoviesByGenre = (genre:number, page:number=1) => {
+        return this.getResource(`${this._apiBase}3/discover/movie?${this._apiKey}&language=$en-US&page=${page}&with_genres=${genre}&include_adult=false`).then(data => data.results);
     }
 
 }

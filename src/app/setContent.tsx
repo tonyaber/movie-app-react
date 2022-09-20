@@ -7,8 +7,9 @@ import emptyImage from '../assets/svg/search-animated.svg';
 import React from 'react';
 import Preview from '../preview/preview';
 import { Button } from '../preview/button';
+import GenreList from '../genre/genreList'
 
-export function setContent(process: string, data: IMovieItem[],onClick:()=>void) {
+export function setContent(process: string, data: IMovieItem[],onMoreClick:()=>void,onGenreClick:(id:number)=>void, genre:number) {
   switch (process) {
     case 'loading':
       return <Spinner />;
@@ -23,15 +24,24 @@ export function setContent(process: string, data: IMovieItem[],onClick:()=>void)
       return (
         <>
           <Preview movieList={data.slice(0, 5)} />
+          <GenreList onGenreClick={(id)=>onGenreClick(id)}  genreActive={genre}/>
           <List movieList={data} />
-          <Button text={'More'} onClick={()=>onClick()}></Button>
+          <Button text={'More'} onClick={()=>onMoreClick()}></Button>
         </>);    
       break;
     case 'showSearchList':
       return(
         <>
           <List movieList={data} />
-          <Button text={'More'} onClick={()=>onClick()}></Button>
+          <Button text={'More'} onClick={()=>onMoreClick()}></Button>
+        </>);
+      break;
+    case 'showGenreList':
+      return(
+        <>
+          <GenreList onGenreClick={(id) => onGenreClick(id)} genreActive={genre} />
+          <List movieList={data} />
+          <Button text={'More'} onClick={()=>onMoreClick()}></Button>
         </>);
       break;
   }

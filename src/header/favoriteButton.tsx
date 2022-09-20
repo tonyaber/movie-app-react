@@ -2,8 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Button = styled.button`
-  padding: 5px;
+interface IButton{
+  text: string;
+  active?: boolean;
+  onClick: () => void;
+}
+
+const ButtonComponent = styled.button`
+  padding: 10px;
   border: none; 
   outline: none;
   background: none;
@@ -20,10 +26,8 @@ const Button = styled.button`
   } 
 `
 
-export default function FavoriteButton() {
+export default function Button({text, onClick, active}:IButton) {
   return (
-      <Link to='/favorite'>
-        <Button>Favorite movies</Button>
-      </Link>
+      <ButtonComponent onClick={()=>onClick()}>{text}</ButtonComponent>
     )
 } 

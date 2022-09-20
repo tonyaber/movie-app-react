@@ -1,9 +1,10 @@
 import React from "react";
 import Logo from './logo';
 import SearchPanel from './searchPanel';
-import FavoriteButton from './favoriteButton';
+import Button from './favoriteButton';
 import { IPopularMovie } from "../dto";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   padding: 10px;
@@ -30,8 +31,10 @@ export default function Header( {onPopularMovie }:IPopularMovie){
   return (
     <HeaderContainer>
       <HeaderContent>
-        <Logo onPopularMovie={()=>onPopularMovie() } />
-        <FavoriteButton/>
+        <Logo onPopularMovie={() => onPopularMovie()} />
+        <Link to='/favorite'>
+          <Button text={"Favorite movies"} onClick={()=>{}}/>
+        </Link>
       </HeaderContent>          
     </HeaderContainer>
     )
