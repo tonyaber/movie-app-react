@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, useMemo } from "react";
 import Header from '../header/header';
 import Preview from '../preview/preview';
 import List from '../list/list';
@@ -19,6 +19,7 @@ import errorImage from '../assets/svg/error-animated.svg';
 import { Helmet } from "react-helmet";
 import GlobalStyles from './global';
 import { setContent } from './setContent';
+import { Button } from "../preview/button";
 
 const Container = styled.div`
   width:80%;
@@ -32,18 +33,20 @@ export default function Application() {
   const [favoriteMovies, setFavoriteMovies] = useState<Array<IMovieItem>>([]);
   const [search, setSearch] = useState<string>('');
   const [process, setProcess] = useState<string>('loading');
+  const [page, setPage] = useState<number>(1);
 
-  const movieService = new MovieService();
+  const movieService = useMemo<MovieService>(()=>new MovieService(),[]);
   // const model = new Model();
   // const controller = new Controller(model, movieService);
   
   const setMovieSearch = (text: string) => {
     setSearch(text);
-    setProcess('loading')
+    setProcess('loading');
+    setPage(1);
     if (!text.length) {      
       setMovieList(popularMovie);
       setSearch('');
-      setProcess('showMovieList')
+      setProcess('showMovieList');
       return;
     }
    
@@ -76,6 +79,7 @@ export default function Application() {
   const onPopularMovieClick = () => {
     setMovieList(popularMovie);
     setSearch('');
+    setPage(1)
     setProcess('showMovieList')
     //add cleanSearchPanel
   }
@@ -90,7 +94,25 @@ export default function Application() {
   //       setError(true);
   //   });
   // }
-
+  const onMoreMovie = ()  => {
+    
+    switch (process){
+      case 'showMovieList':
+        movieService.getPopularMovie(page + 1)
+          .then(data => {
+            setPage(page => page + 1)
+            setMovieList(movies => [...movies, ...data]);
+          })
+        break;
+      case 'showSearchList':
+        movieService.getMovieSearch(search, page + 1)
+          .then(data => {
+            setPage(page => page + 1)
+            setMovieList(movies => [...movies, ...data]);
+          })
+        break;
+    }
+  }
   useEffect(() => {
     movieService.getPopularMovie()
       .then(data => {
@@ -113,7 +135,7 @@ export default function Application() {
                 <title>MovieApp</title>
               </Helmet>
               <SearchPanel onSearchPanel={(text) => setMovieSearch(text)} value={search} />  
-                {setContent(process,movieList)}
+                {setContent(process,movieList, onMoreMovie)}
             </Route>
             <Route exact path={'/movie/:id'}>
               <AboutMovie server={movieService} onAddToFavorite={(id) => addToFavorite(id)} favorite={favoriteMovies.slice().map(it=>it.id)}/>    
@@ -124,7 +146,7 @@ export default function Application() {
               </Helmet>            
                 {!favoriteMovies.length ?
                   <Empty/> :             
-                  <List movieList={favoriteMovies}/>
+                <List movieList={favoriteMovies} />
                 }
             </Route>
             <Route path={'/*'}>

@@ -7,7 +7,6 @@ import { Feature } from './feature';
 import { FeatureStart } from './featureStart';
 import { Overview } from './overview';
 import { FavoriteButton } from './favoriteButton';
-import { Button } from '../preview/button';
 import star from '../assets/svg/star.svg';
 import clock from '../assets/svg/clock.svg';
 import calendar from '../assets/svg/calendar.svg';

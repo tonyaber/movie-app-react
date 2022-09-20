@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 interface IButton {
   text: string;
-   children?: JSX.Element,
+  children?: JSX.Element,
+  onClick: () => void;
 }
 
 const ButtonComponent = styled.button`
@@ -27,9 +28,9 @@ const ButtonComponent = styled.button`
   } 
 `;
 
-export const Button:React.FC<IButton> = ({ text, children }) =>{
+export const Button:React.FC<IButton> = ({ text, children , onClick}) =>{
   return (
-    <ButtonComponent>
+    <ButtonComponent onClick = {()=>onClick()}>
       {text}
       {children}
     </ButtonComponent>
