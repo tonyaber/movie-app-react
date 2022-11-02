@@ -8,7 +8,11 @@ interface IButton{
   onClick: () => void;
 }
 
-const ButtonComponent = styled.button`
+interface IButtonComponent{
+  active?: boolean;
+}
+
+const ButtonComponent = styled.button<IButtonComponent>`
   padding: 10px;
   border: none; 
   outline: none;
@@ -17,6 +21,7 @@ const ButtonComponent = styled.button`
   border-radius: 10px;
   transition: 0.5s ease-in;
   cursor:pointer;
+  background-color: ${props => props.active?'red':'none'};
   
   &:hover{
     transform: scale(1.2);
@@ -24,10 +29,11 @@ const ButtonComponent = styled.button`
     -webkit-box-shadow: inset 0 0 10px #b60082; 
     box-shadow: inset 0 0 10px #b60082;
   } 
+  
 `
 
 export default function Button({text, onClick, active}:IButton) {
   return (
-      <ButtonComponent onClick={()=>onClick()}>{text}</ButtonComponent>
+      <ButtonComponent onClick={()=>onClick()} active={active}>{text}</ButtonComponent>
     )
 } 
