@@ -8,6 +8,10 @@ interface IOverview {
 const OverviewStyled = styled.p`
   text-align: center;
   margin-top: 20px;
+  display: block;
+  @media (max-width: 768px) {
+    display: none;
+}
 `;
 
 export function Overview({ text }: IOverview) {

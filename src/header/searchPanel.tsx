@@ -11,6 +11,9 @@ const Input = styled.input`
   border: none;
   border-radius: 20px;
   background-color: #34213194;
+  @media (max-width: 400px) {
+  width: 90%;
+}
 `;
 
 export default function SearchPanel({onSearchPanel, value}:ISearchPanel){

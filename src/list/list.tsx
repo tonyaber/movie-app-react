@@ -14,11 +14,7 @@ const Container = styled.div`
   }
   @media (min-width: 321px) {
     gap: 30px 20px;
-  }
-  @media (min-width: 480px) {
-    gap: 30px 20px;
-  }
-  
+  }  
   @media (min-width: 1024px) {
     gap: 50px 40px;
   }

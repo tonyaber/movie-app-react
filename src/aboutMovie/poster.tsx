@@ -9,6 +9,13 @@ const PosterStyled = styled.img`
   height: 300px;
   z-index:1;
   transition: 0.5s ease-in;
+  @media (max-width: 600px) {
+    width: 150px;
+    height: 200px;
+  }
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;
 
 export function Poster({url}:IPoster){

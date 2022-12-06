@@ -18,6 +18,15 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  @media (max-width: 320px) {
+    gap: 30px 0;
+  }
+  @media (min-width: 321px) {
+    gap: 30px 20px;
+  } 
+  @media (min-width: 1024px) {
+    gap: 50px 40px;
+  }
 `
 export default function Actors({ items }: IActors) {
   console.log(items)

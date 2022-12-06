@@ -47,9 +47,7 @@ export default function Application() {
     setProcess('loading');
     setPage(1);
     if (!text.length) {      
-      setMovieList(popularMovie);
-      setSearch('');
-      setProcess('showMovieList');
+      onPopularMovieClick();
       return;
     }
    
@@ -101,7 +99,8 @@ export default function Application() {
   const onPopularMovieClick = () => {
     setMovieList(popularMovie);
     setSearch('');
-    setPage(1)
+    setPage(1);
+    setGenre(0);
     setProcess('showMovieList')
     //add cleanSearchPanel
   }

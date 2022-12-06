@@ -17,6 +17,11 @@ const Image = styled.img`
 `
 
 const Title = styled.h1`
+  font-size: 32px;
+  @media (max-width: 480px) {
+    font-size: 24px;
+
+}
 `
 
 const LinkComponent = styled(Link)` 

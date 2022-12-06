@@ -30,6 +30,11 @@ const FavoriteContainer = styled.button`
    &:hover{
     transform: scale(1.05);
   } 
+  @media (max-width: 480px) {
+    width: 50px;
+    padding: 15px;
+    margin: 20px 0 0 auto;
+  }
 `
 
 const FavoriteIcon = styled.img`
@@ -39,6 +44,9 @@ const FavoriteIcon = styled.img`
 `
 
 const FavoriteText = styled.span`
+  @media (max-width: 480px) {
+    display: none;
+  }
 `
 
 export function FavoriteButton({ onAddToFavorite, isFavorite }: IFavoriteButton) {

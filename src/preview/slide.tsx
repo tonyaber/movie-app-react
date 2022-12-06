@@ -18,26 +18,59 @@ const SlideContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
 `
 
 const Image = styled.img`
-  max-height: 500px;
-  width: 60%;
+   width: auto;
+    transform: none;
+    height: 100%;
   object-fit: contain;
   filter: brightness(90%);
-  transform: translateY(-20%);
+
+  z-index:4;
+  position: relative;
+  @media (min-width: 1024px) {
+    width: 60%;
+    max-height: 400px;
+    transform: translateY(-20%);
+  }
 `
 
 const Information = styled.div`
   width: 30%;
   height: 100%;
   padding: 10px 50px 10px 20px;
+  z-index:5;
+  @media (max-width: 320px) {
+    width: 100%;
+  position: absolute;
+
+  }
+  @media (min-width: 321px) {
+    width: 100%;
+    position: absolute;
+
+  }
+  @media (min-width: 480px) {
+    width: 50%;
+    position: absolute;
+
+  }
+
+  @media (min-width: 1024px) {
+    width: 30%;
+    position:static;
+  }
 `
 
 const Title = styled.h3`
   font-size: 32px;
   color: gold;
   text-align: center;
+  @media (max-width: 480px) {
+    font-size: 24px;
+}
 `
 
 const LinkComponent = styled(Link)`

@@ -27,7 +27,21 @@ const Character=styled.p`
 `
 
 const Container = styled.div`
-width: calc((100% - 160px) / 5);
+ @media (max-width: 320px) {
+    width: 80%;
+  }
+  @media (min-width: 321px) {
+    width: calc((100% - 40px) / 2);
+  }
+  @media (min-width: 480px) {
+    width: calc((100% - 40px) / 3);
+  }
+  @media (min-width: 768px) {
+    width: calc((100% - 120px) / 4);
+  }
+  @media (min-width: 1024px) {
+    width: calc((100% - 160px) / 5);
+  }
 `
 export function Actor({ url, name, character }: IActor) {
   return (

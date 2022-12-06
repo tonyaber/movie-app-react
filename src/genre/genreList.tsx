@@ -23,7 +23,7 @@ justify-content: center;
 `
 
 const GenreMenu = styled.div`
- 
+ margin: 20px 0;
   padding: 10px;
   border: 1px solid #b60082;
   border-radius: 10px;
