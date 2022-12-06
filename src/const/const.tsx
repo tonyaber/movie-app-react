@@ -1,10 +1,11 @@
 const GENRES = [
-  { id: 28, name: 'action' },
+  {id:0, name:'all'},  
   { id: 16, name: 'animated' },
   { id: 99, name: 'documentary' },
   { id: 18, name: 'drama' },
   { id: 10751, name: 'family' },
   { id: 35, name: 'comedy' },
+  { id: 28, name: 'action' },
   { id: 36, name: 'history' },
   { id: 10752, name: 'war' },
   { id: 80, name: 'crime' },

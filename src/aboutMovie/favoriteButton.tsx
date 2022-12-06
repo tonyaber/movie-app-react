@@ -19,7 +19,7 @@ const FavoriteContainer = styled.button`
   border-radius: 10px;
   color: white;
   text-decoration: none;
-  width: 150px;
+  width: 200px;
   text-align: center;
   transition: 0.5s ease-in;
 
@@ -33,20 +33,20 @@ const FavoriteContainer = styled.button`
 `
 
 const FavoriteIcon = styled.img`
-width: 30px;
-height: 30px;
-filter: invert(86%);
+  width: 30px;
+  height: 30px;
+  filter: invert(86%);
 `
 
 const FavoriteText = styled.span`
 `
 
 export function FavoriteButton({ onAddToFavorite, isFavorite }: IFavoriteButton) {
-  const text = isFavorite ? 'Add to your Favorite movies?' : 'Remove from your favorite movies?';
-  const src = isFavorite ? heart : disableHeart;
+  const text = isFavorite ? 'Remove from favorite' : 'Add to favorite';
+  const src = isFavorite ? disableHeart : heart;
   return (
     <FavoriteContainer onClick={() => { onAddToFavorite() }}>
-      <FavoriteText>Favorite Movie:</FavoriteText>
+    <FavoriteText>{text}</FavoriteText>
       <FavoriteIcon src={ src} />
    </FavoriteContainer>
   )

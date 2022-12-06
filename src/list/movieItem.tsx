@@ -25,7 +25,7 @@ const Container = styled.div`
   position: relative;
    transition: 0.5s ease-in;
   &:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 `
 const LinkComponent = styled(Link)`

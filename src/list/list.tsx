@@ -9,7 +9,7 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 50px 0;
+  gap: 50px 40px;
 `
 
 export default function List({ movieList}:IMovieList) {

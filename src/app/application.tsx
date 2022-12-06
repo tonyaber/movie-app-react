@@ -22,8 +22,10 @@ import { setContent } from './setContent';
 import { Button } from "../preview/button";
 
 const Container = styled.div`
-  width:80%;
+  max-width: 1000px;
+  width: 100%;
   margin: 100px auto 0;
+  padding: 20px;
 `
 
 export default function Application() {
@@ -77,10 +79,15 @@ export default function Application() {
     }
   }
 
-  const onGenreClick = (id: number) => {
-    setProcess('loading');
+  const onGenreClick = (id: number) => { 
     setGenre(id);
     setPage(1);
+    if(!id){
+      setMovieList(popularMovie);
+      return;
+    }
+    setProcess('loading');
+   
     movieService.getMoviesByGenre(id).then((data) => {
       setMovieList(data);
       setProcess('showGenreList');

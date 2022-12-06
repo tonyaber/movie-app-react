@@ -14,8 +14,9 @@ const Title = styled.h3`
 `
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-wrap: wrap;
 `
 export default function Actors({ items }: IActors) {

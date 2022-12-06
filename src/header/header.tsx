@@ -19,9 +19,10 @@ const HeaderContainer = styled.div`
 `
 
 const HeaderContent = styled.div`
-  width: 80%;
+  max-width: 1000px;
+  width: 100%;
   margin: 0 auto;
-  padding: 10px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;

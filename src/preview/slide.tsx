@@ -40,7 +40,7 @@ const Title = styled.h3`
 `
 
 const LinkComponent = styled(Link)`
-
+  text-decoration: none;
 `
 
 export default function Slide({ item }: ISlide) {
@@ -52,7 +52,7 @@ export default function Slide({ item }: ISlide) {
         <Title>{item.title}</Title>
         <FeatureStart text={item.vote_average.toFixed(1)} url={ star} />
         <Overview text={overview} />
-        <Link to={"/movie/" + item.id}><Button text={"More Information "} onClick={()=>{}} /></Link>
+        <LinkComponent to={"/movie/" + item.id}><Button text={"More Information "} onClick={()=>{}} /></LinkComponent>
       </Information>
       
       

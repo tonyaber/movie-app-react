@@ -24,7 +24,7 @@ const ButtonComponent = styled.button<IButtonComponent>`
   background-color: ${props => props.active?'red':'none'};
   
   &:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
     -moz-box-shadow:inset  0 0 10px #b60082; 
     -webkit-box-shadow: inset 0 0 10px #b60082; 
     box-shadow: inset 0 0 10px #b60082;

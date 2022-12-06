@@ -14,7 +14,17 @@ const Image = styled.img`
     height: 96px;
     object-fit: cover;
     border-radius: 50%;
+    margin: 0 auto;
 `;
+
+const Name = styled.p`
+  text-align: center;
+`;
+
+const Character=styled.p`
+  text-align: center;
+  font-style: italic;
+`
 
 const Container = styled.div`
 width: calc((100% - 160px) / 5);
@@ -23,8 +33,8 @@ export function Actor({ url, name, character }: IActor) {
   return (
     <Container>      
       <Image src={'https://image.tmdb.org/t/p/w500/' + url} />
-      <p>{name}</p>
-      <span>as {character }</span>
+      <Name>{name}</Name>
+      {character?<Character>as {character }</Character>:null}
     </Container>
   )
 }

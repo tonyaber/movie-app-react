@@ -9,6 +9,10 @@ interface IGenre{
 }
 const GenreComponent = styled.div`
 margin: 20px 0;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 40px;
 `
 
 export default function GenreList({onGenreClick,genreActive}:IGenre) {
