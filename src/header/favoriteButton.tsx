@@ -1,18 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 
 interface IButton{
   text: string;
-  active?: boolean;
+
   onClick: () => void;
+
 }
 
-interface IButtonComponent{
-  active?: boolean;
-}
 
-const ButtonComponent = styled.button<IButtonComponent>`
+
+const ButtonComponent = styled.button`
   padding: 10px;
   border: none; 
   outline: none;
@@ -21,10 +20,10 @@ const ButtonComponent = styled.button<IButtonComponent>`
   border-radius: 10px;
   transition: 0.5s ease-in;
   cursor:pointer;
-  background-color: ${props => props.active?'red':'none'};
+ 
   
   &:hover{
-    transform: scale(1.1);
+    transform: scale(1.2);
     -moz-box-shadow:inset  0 0 10px #b60082; 
     -webkit-box-shadow: inset 0 0 10px #b60082; 
     box-shadow: inset 0 0 10px #b60082;
@@ -32,8 +31,8 @@ const ButtonComponent = styled.button<IButtonComponent>`
   
 `
 
-export default function Button({text, onClick, active}:IButton) {
+export default function Button({text, onClick}:IButton) {
   return (
-      <ButtonComponent onClick={()=>onClick()} active={active}>{text}</ButtonComponent>
+      <ButtonComponent onClick={()=>onClick()}>{text}</ButtonComponent>
     )
 } 

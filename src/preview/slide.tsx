@@ -22,6 +22,7 @@ const SlideContainer = styled.div`
 
 const Image = styled.img`
   max-height: 500px;
+  width: 60%;
   object-fit: contain;
   filter: brightness(90%);
   transform: translateY(-20%);

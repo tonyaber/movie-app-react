@@ -1,6 +1,6 @@
 import { GENRES } from '../const/const';
-import Button from '../header/favoriteButton';
-import React from 'react';
+import Genre from './genre';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface IGenre{
@@ -8,17 +8,46 @@ interface IGenre{
   genreActive: number;
 }
 const GenreComponent = styled.div`
+gap: 10px 10px;
+position: relative;
 margin: 20px 0;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
-gap: 40px;
+  @media (min-width: 768px) {
+    gap: 20px 20px;
+  }
+  @media (min-width: 1024px) {
+    gap: 20px 40px;
+  }
+`
+
+const GenreMenu = styled.div`
+ 
+  padding: 10px;
+  border: 1px solid #b60082;
+  border-radius: 10px;
+  text-align: center;
+  @media (min-width: 769px) {
+      display: none;
+       
+  }
 `
 
 export default function GenreList({onGenreClick,genreActive}:IGenre) {
+  const [isShow, setShow]=useState(true);
+  console.log(isShow)
+
+  const handleClick = ()=>{
+    setShow(state=>state=!isShow);
+  }
   return (
-    <GenreComponent>
-      {GENRES.map((it, i) => <Button text={it.name} key={i} onClick={() => onGenreClick(it.id)} active={genreActive===it.id}></Button>)}
-    </GenreComponent>
+    <>
+      <GenreMenu onClick={handleClick}>Genres</GenreMenu>
+      <GenreComponent>
+ {GENRES.map((it, i) => <Genre isShow={isShow} text={it.name} key={i} onClick={() => onGenreClick(it.id)} active={genreActive===it.id}></Genre>)}
+      </GenreComponent>
+     
+    </>
   )
 }

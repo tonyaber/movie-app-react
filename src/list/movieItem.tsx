@@ -20,13 +20,28 @@ const Title = styled.h3`
 `
 
 const Container = styled.div`
-  width: calc((100% - 160px) / 5);
+
   overflow: hidden;
   position: relative;
    transition: 0.5s ease-in;
   &:hover{
     transform: scale(1.1);
   }
+  @media (max-width: 320px) {
+    width: 80%;
+  }
+  @media (min-width: 321px) {
+    width: calc((100% - 40px) / 2);
+  }
+
+  @media (min-width: 768px) {
+    width: calc((100% - 80px) / 4);
+  }
+  @media (min-width: 1024px) {
+    width: calc((100% - 160px) / 5);
+  }
+  
+  
 `
 const LinkComponent = styled(Link)`
   color: white;
