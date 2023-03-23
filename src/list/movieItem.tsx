@@ -1,5 +1,5 @@
 import React from "react";
-import { IItem, IMovieItem } from '../dto';
+import { IItem } from '../dto';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -59,7 +59,7 @@ const LinkComponent = styled(Link)`
 export default function MovieItem({ item }: IItem) {
   return (
     <Container>
-      <LinkComponent to={"/movie/" + item.id} > 
+      <LinkComponent to={"/movie/" + item.id}  data-testid={'movie-item'}> 
         <Image src={'https://image.tmdb.org/t/p/w500/' + item.poster_path} />    
         <Title>{item.title}</Title>
       </LinkComponent>

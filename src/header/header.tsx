@@ -31,7 +31,7 @@ export default function Header( {onPopularMovie }:IPopularMovie){
     <HeaderContainer>
       <HeaderContent>
         <Logo onPopularMovie={() => onPopularMovie()} />
-        <Link to='/favorite'>
+        <Link to='/favorite' data-testid={'favorite-button'}>
           <Button text={"Favorite movies"} onClick={()=>{}}/>
         </Link>
       </HeaderContent>          

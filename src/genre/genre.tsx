@@ -35,6 +35,6 @@ const GenreComponent = styled.div<IGenreComponent>`
 
 export default function Genre({text, onClick, active,isShow}:IGenre) {
   return (
-      <GenreComponent onClick={()=>onClick()}  isShow={isShow} active={active}>{text}</GenreComponent>
+      <GenreComponent  data-testid='genre' onClick={()=> onClick()}  isShow={isShow} active={active}>{text}</GenreComponent>
     )
 } 

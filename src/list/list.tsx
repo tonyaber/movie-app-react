@@ -21,7 +21,6 @@ const Container = styled.div`
 `
 
 export default function List({ movieList}:IMovieList) {
-  console.log(movieList)
   return (
     <Container>
       {movieList.map((item,i) => <MovieItem key={i} item={item} />)}

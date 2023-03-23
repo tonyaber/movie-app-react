@@ -54,6 +54,6 @@ export default function Button({text, onClick}:IButton) {
       <ButtonComponent onClick={()=>onClick()}>
         <Text>{text}</Text>
          <Icon src={heart}/>
-         </ButtonComponent>
+      </ButtonComponent>
     )
 } 

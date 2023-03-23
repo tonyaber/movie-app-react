@@ -37,7 +37,7 @@ const LinkComponent = styled(Link)`
 
 export default function Logo({onPopularMovie}:IPopularMovie) {
   return (
-    <LinkComponent to={"/"} onClick={()=>onPopularMovie()}>
+    <LinkComponent to={"/"} onClick={()=>onPopularMovie()}  data-testid={'logo'}>
       <Icon src={icon} />
       <Title>MovieApp</Title>
     

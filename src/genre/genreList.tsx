@@ -36,16 +36,15 @@ const GenreMenu = styled.div`
 
 export default function GenreList({onGenreClick,genreActive}:IGenre) {
   const [isShow, setShow]=useState(true);
-  console.log(isShow)
 
   const handleClick = ()=>{
-    setShow(state=>state=!isShow);
+    setShow((state)=>state=!isShow);
   }
   return (
     <>
       <GenreMenu onClick={handleClick}>Genres</GenreMenu>
       <GenreComponent>
- {GENRES.map((it, i) => <Genre isShow={isShow} text={it.name} key={i} onClick={() => onGenreClick(it.id)} active={genreActive===it.id}></Genre>)}
+        {GENRES.map((it, i) => <Genre isShow={isShow} text={it.name} key={i} onClick={() => onGenreClick(it.id)} active={genreActive===it.id}></Genre>)}
       </GenreComponent>
      
     </>

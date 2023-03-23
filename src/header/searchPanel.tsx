@@ -19,7 +19,7 @@ const Input = styled.input`
 export default function SearchPanel({onSearchPanel, value}:ISearchPanel){
     return (
       <>
-        <Input onChange={(e) => onSearchPanel(e.target.value)} type="text" placeholder="Search movie..." value={value} />
+        <Input onChange={(e) => onSearchPanel(e.target.value)} type="text"  data-testid={'search-panel'} placeholder="Search movie..." value={value} />
       </>
     )
 } 

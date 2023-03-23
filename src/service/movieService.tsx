@@ -4,7 +4,6 @@ export default class MovieService {
     _page:number;
     constructor(){
         this._page = 1;
-        console.log('constructor')
         this.getMoviesByGenre(35);
     }
     getResource = async (url: string) => {
