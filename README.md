@@ -1,15 +1,9 @@
-# 🚀 Welcome to your new awesome project!
+### Movie-App is a site about various films
 
-This project has been created using **webpack-cli**, you can now run
+## Skills: 
+- React, React Router, Styled Components
+- Work with api
+- React Testing Library, Jest
 
-```
-npm run build
-```
 
-or
-
-```
-yarn build
-```
-
-to bundle your application
+## [Deploy](https://tonyaber-react-movie.netlify.app/)
