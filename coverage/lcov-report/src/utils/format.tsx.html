@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.25% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.25% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -80,34 +80,34 @@
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
-const formatTime = (<span class="fstat-no" title="function not covered" >duration: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  if (duration &lt; 60) {</span>
-<span class="cstat-no" title="statement not covered" >    return duration;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >    const hour = Math.floor(duration / 60);</span>
-<span class="cstat-no" title="statement not covered" >  const minute = Math.floor(duration % 60);</span>
-<span class="cstat-no" title="statement not covered" >    return `${hour} : ${minute &gt; 10 ? minute : '0' + minute}`;</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+const formatTime = (duration: number) =&gt; {
 &nbsp;
-const formatDate = (<span class="fstat-no" title="function not covered" >date: string) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const index = date.indexOf('-');</span>
-<span class="cstat-no" title="statement not covered" >  return date.slice(0, index);</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+  if (duration &lt; 60) {
+    return `00 : ${duration &gt; 10 ? duration : '0' + duration}`;
+  }
+    const hour = Math.floor(duration / 60);
+    const minute = Math.floor(duration % 60);
+    return `${hour} : ${minute &gt; 10 ? minute : '0' + minute}`;
+}
+&nbsp;
+const formatDate = (date: string) =&gt; {
+  const index = date.indexOf('-');
+  return date.slice(0, index);
+}
  export { formatDate, formatTime };</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -115,7 +115,7 @@ const formatDate = (<span class="fstat-no" title="function not covered" >date: s
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-21T19:24:36.151Z
+                at 2023-03-28T16:19:22.778Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
