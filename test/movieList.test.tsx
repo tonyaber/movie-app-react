@@ -28,6 +28,7 @@ describe('Movie List', ()=>{
           logo_path: '',
         }]
     });
+
     test('create Movie List', ()=>{
         const movieList = render(
             <BrowserRouter>
@@ -35,7 +36,7 @@ describe('Movie List', ()=>{
             </BrowserRouter>);
         const movieItems = movieList.getAllByTestId('movie-item');
         expect(movieItems).toHaveLength(5);
-    })
+    });
 
     test('click on movie', ()=>{
         const movieList = render(
@@ -45,7 +46,7 @@ describe('Movie List', ()=>{
                 </Route>               
             </BrowserRouter>);
         const movieItems = movieList.getByTestId('movie-item');
-        fireEvent.click(movieItems)
+        fireEvent.click(movieItems);
         expect(screen.queryByTestId('movie-item')).not.toBeInTheDocument();
-    })
+    });
 })

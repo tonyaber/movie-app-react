@@ -6,12 +6,11 @@ export default class MovieService {
         this._page = 1;
         this.getMoviesByGenre(35);
     }
-    getResource = async (url: string) => {
+    private getResource = async (url: string) => {
         let res = await fetch(url);
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, status: ${res.status}`);
         }
-        
         return await res.json();
     }
 

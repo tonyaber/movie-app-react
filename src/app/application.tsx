@@ -1,9 +1,7 @@
 import { useState,useEffect, useMemo } from "react";
 import Header from '../header/header';
-import Preview from '../preview/preview';
 import List from '../list/list';
 import AboutMovie from '../aboutMovie/aboutMovie';
-import Spinner from '../spinner/spinner';
 import { IMovieItem } from "../dto";
 import MovieService from '../service/movieService';
 import {
@@ -19,7 +17,6 @@ import errorImage from '../assets/svg/error-animated.svg';
 import { Helmet } from "react-helmet";
 import GlobalStyles from './global';
 import { setContent } from './setContent';
-import { Button } from "../preview/button";
 
 const Container = styled.div`
   max-width: 1000px;
@@ -38,10 +35,7 @@ export default function Application() {
   const [page, setPage] = useState<number>(1);
   const [genre, setGenre] = useState<number>(0);
 
-  const movieService = useMemo<MovieService>(()=>new MovieService(),[]);
-  // const model = new Model();
-  // const controller = new Controller(model, movieService);
-  
+  const movieService = useMemo<MovieService>(()=>new MovieService(),[]); 
   const setMovieSearch = (text: string) => {
     setSearch(text);
     setProcess('loading');

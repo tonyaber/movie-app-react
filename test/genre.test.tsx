@@ -25,5 +25,5 @@ describe('Genre', ()=>{
         fireEvent.click(el);
         expect(onClick).toHaveBeenCalled();
         expect(onClick).toHaveBeenCalledWith(35)       
-    })
+    });
 })

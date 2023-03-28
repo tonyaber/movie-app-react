@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">2.56% </span>
+                <span class="strong">94.59% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/39</span>
+                <span class='fraction'>35/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">2.56% </span>
+                <span class="strong">94.59% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/39</span>
+                <span class='fraction'>35/37</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -99,92 +99,86 @@
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export default <span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >class MovieService {</span></span>
-<span class="cstat-no" title="statement not covered" >    _apiBase = 'https://api.themoviedb.org/';</span>
-<span class="cstat-no" title="statement not covered" >    _apiKey = 'api_key=cbf6d6f193d7d4a9b8ee613671126788';</span>
-<span class="cstat-no" title="statement not covered" >    _page:number;</span>
-<span class="cstat-no" title="statement not covered" >    constructor(){</span>
-<span class="cstat-no" title="statement not covered" >        this._page = 1;</span>
-<span class="cstat-no" title="statement not covered" >        console.log('constructor')</span>
-<span class="cstat-no" title="statement not covered" >        this.getMoviesByGenre(35);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    getResource = async (url: string) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        let res = await fetch(url);</span>
-<span class="cstat-no" title="statement not covered" >        if (!res.ok) {</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">export default class MovieService {
+    _apiBase = 'https://api.themoviedb.org/';
+    _apiKey = 'api_key=cbf6d6f193d7d4a9b8ee613671126788';
+    _page:number;
+    constructor(){
+        this._page = 1;
+        this.getMoviesByGenre(35);
+    }
+    private getResource = async (url: string) =&gt; {
+        let res = await fetch(url);
+        if (!res.ok) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >            throw new Error(`Could not fetch ${url}, status: ${res.status}`);</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >        return await res.json();</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    getPopularMovie = (page:number=1) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.getResource(`${this._apiBase}3/movie/popular?${this._apiKey}&amp;language=$en-US&amp;page=${page}`).then(data =&gt; data.results);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    getMovie = (id: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.getResource(`${this._apiBase}3/movie/${id}?${this._apiKey}&amp;language=en-US`);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    getMovieSearch = (text: string, page:number=1) =&gt; { </span>
-<span class="cstat-no" title="statement not covered" >        return this.getResource(`${this._apiBase}3/search/movie?${this._apiKey}&amp;query=${text}&amp;page=${page}&amp;include_adult=false`).then(data =&gt; data.results);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    getActors = (id:number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.getResource(` ${this._apiBase}3/movie/${id}/credits?${this._apiKey}&amp;append_to_response=videos`)</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    getMoviesByGenre = (genre:number, page:number=1) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.getResource(`${this._apiBase}3/discover/movie?${this._apiKey}&amp;language=$en-US&amp;page=${page}&amp;with_genres=${genre}&amp;include_adult=false`).then(data =&gt; data.results);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr></table></pre>
+        return await res.json();
+    }
+&nbsp;
+    getPopularMovie = (page:number=1) =&gt; {
+        return this.getResource(`${this._apiBase}3/movie/popular?${this._apiKey}&amp;language=$en-US&amp;page=${page}`).then(data =&gt; data.results);
+    }
+&nbsp;
+    getMovie = (id: number) =&gt; {
+        return this.getResource(`${this._apiBase}3/movie/${id}?${this._apiKey}&amp;language=en-US`);
+    }
+&nbsp;
+    getMovieSearch = (text: string, page:number=1) =&gt; { 
+        return this.getResource(`${this._apiBase}3/search/movie?${this._apiKey}&amp;query=${text}&amp;page=${page}&amp;include_adult=false`).then(data =&gt; data.results);
+    }
+&nbsp;
+    getActors = (id:number) =&gt; {
+        return this.getResource(` ${this._apiBase}3/movie/${id}/credits?${this._apiKey}&amp;append_to_response=videos`)
+    }
+&nbsp;
+    getMoviesByGenre = (genre:number, page:number=1) =&gt; {
+        return this.getResource(`${this._apiBase}3/discover/movie?${this._apiKey}&amp;language=$en-US&amp;page=${page}&amp;with_genres=${genre}&amp;include_adult=false`).then(data =&gt; data.results);
+    }
+&nbsp;
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-21T19:24:36.151Z
+                at 2023-03-28T16:05:59.607Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
